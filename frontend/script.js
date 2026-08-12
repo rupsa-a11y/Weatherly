@@ -3,35 +3,65 @@
 ========================================= */
 
 
+const weatherForm =
+    document.getElementById("weather-form");
 
+const cityInput =
+    document.getElementById("city-input");
 
-const weatherForm = document.getElementById("weather-form");
-const cityInput = document.getElementById("city-input");
-const searchBtn = document.getElementById("search-btn");
+const searchBtn =
+    document.getElementById("search-btn");
 
-const searchError = document.getElementById("search-error");
+const searchError =
+    document.getElementById("search-error");
 
-const loadingState = document.getElementById("loading-state");
-const weatherError = document.getElementById("weather-error");
-const weatherContent = document.getElementById("weather-content");
+const loadingState =
+    document.getElementById("loading-state");
 
-const retryBtn = document.getElementById("retry-btn");
+const weatherError =
+    document.getElementById("weather-error");
 
-const cityName = document.getElementById("city-name");
-const dateElement = document.getElementById("date");
+const weatherContent =
+    document.getElementById("weather-content");
 
-const temperature = document.getElementById("temperature");
-const feelsLike = document.getElementById("feels-like");
-const weatherCondition = document.getElementById("weather-condition");
-const weatherIcon = document.getElementById("weather-icon");
+const retryBtn =
+    document.getElementById("retry-btn");
 
-const humidity = document.getElementById("humidity");
-const wind = document.getElementById("wind");
-const pressure = document.getElementById("pressure");
-const visibility = document.getElementById("visibility");
+const cityName =
+    document.getElementById("city-name");
 
-const sunrise = document.getElementById("sunrise");
-const sunset = document.getElementById("sunset");
+const dateElement =
+    document.getElementById("date");
+
+const temperature =
+    document.getElementById("temperature");
+
+const feelsLike =
+    document.getElementById("feels-like");
+
+const weatherCondition =
+    document.getElementById("weather-condition");
+
+const weatherIcon =
+    document.getElementById("weather-icon");
+
+const humidity =
+    document.getElementById("humidity");
+
+const wind =
+    document.getElementById("wind");
+
+const pressure =
+    document.getElementById("pressure");
+
+const visibility =
+    document.getElementById("visibility");
+
+const sunrise =
+    document.getElementById("sunrise");
+
+const sunset =
+    document.getElementById("sunset");
 
 const forecastContainer =
     document.getElementById("forecast-container");
@@ -47,8 +77,6 @@ const cloudCover =
 
 const uvIndex =
     document.getElementById("uv-index");
-
-
 
 
 /* =========================================
@@ -213,13 +241,17 @@ function getWeatherInfo(code) {
 
 function formatDate(dateString) {
 
-    const date = new Date(dateString);
+    const date =
+        new Date(dateString);
 
-    return date.toLocaleDateString("en-US", {
-        weekday: "long",
-        month: "long",
-        day: "numeric"
-    });
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            weekday: "long",
+            month: "long",
+            day: "numeric"
+        }
+    );
 }
 
 
@@ -229,12 +261,16 @@ function formatDate(dateString) {
 
 function formatTime(timeString) {
 
-    const date = new Date(timeString);
+    const date =
+        new Date(timeString);
 
-    return date.toLocaleTimeString("en-US", {
-        hour: "numeric",
-        minute: "2-digit"
-    });
+    return date.toLocaleTimeString(
+        "en-US",
+        {
+            hour: "numeric",
+            minute: "2-digit"
+        }
+    );
 }
 
 
@@ -244,11 +280,15 @@ function formatTime(timeString) {
 
 function getDayName(dateString) {
 
-    const date = new Date(dateString);
+    const date =
+        new Date(dateString);
 
-    return date.toLocaleDateString("en-US", {
-        weekday: "short"
-    });
+    return date.toLocaleDateString(
+        "en-US",
+        {
+            weekday: "short"
+        }
+    );
 }
 
 
@@ -268,7 +308,8 @@ function showLoading() {
 
     searchBtn.disabled = true;
 
-    searchBtn.textContent = "Searching...";
+    searchBtn.textContent =
+        "Searching...";
 }
 
 
@@ -282,7 +323,8 @@ function hideLoading() {
 
     searchBtn.disabled = false;
 
-    searchBtn.textContent = "Search";
+    searchBtn.textContent =
+        "Search";
 }
 
 
@@ -300,46 +342,264 @@ function showError() {
 
     searchBtn.disabled = false;
 
-    searchBtn.textContent = "Search";
+    searchBtn.textContent =
+        "Search";
 }
 
 
 /* =========================================
-   GET CITY COORDINATES
+   FIND BEST LOCATION MATCH
 ========================================= */
 
+function findBestLocation(
+    results,
+    searchQuery
+) {
 
+    const query =
+        searchQuery
+            .trim()
+            .toLowerCase();
+
+    /*
+       Remove punctuation and normalize
+       multiple spaces.
+    */
+
+    const normalizedQuery =
+        query
+            .replace(/,/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+
+
+    /* -----------------------------------------
+       1. Exact location name
+    ----------------------------------------- */
+
+    let match =
+        results.find(result =>
+            result.name &&
+            result.name
+                .toLowerCase() === normalizedQuery
+        );
+
+    if (match) {
+        return match;
+    }
+
+
+    /* -----------------------------------------
+       2. Exact country
+    ----------------------------------------- */
+
+    match =
+        results.find(result =>
+            result.country &&
+            result.country
+                .toLowerCase() === normalizedQuery
+        );
+
+    if (match) {
+        return match;
+    }
+
+
+    /* -----------------------------------------
+       3. Exact state / admin1
+    ----------------------------------------- */
+
+    match =
+        results.find(result =>
+            result.admin1 &&
+            result.admin1
+                .toLowerCase() === normalizedQuery
+        );
+
+    if (match) {
+        return match;
+    }
+
+
+    /* -----------------------------------------
+       4. Exact admin2
+    ----------------------------------------- */
+
+    match =
+        results.find(result =>
+            result.admin2 &&
+            result.admin2
+                .toLowerCase() === normalizedQuery
+        );
+
+    if (match) {
+        return match;
+    }
+
+
+    /* -----------------------------------------
+       5. Search "city, state"
+    ----------------------------------------- */
+
+    const queryParts =
+        normalizedQuery
+            .split(" ")
+            .filter(Boolean);
+
+    if (queryParts.length >= 2) {
+
+        match =
+            results.find(result => {
+
+                const name =
+                    result.name
+                        ? result.name.toLowerCase()
+                        : "";
+
+                const admin1 =
+                    result.admin1
+                        ? result.admin1.toLowerCase()
+                        : "";
+
+                const admin2 =
+                    result.admin2
+                        ? result.admin2.toLowerCase()
+                        : "";
+
+                const country =
+                    result.country
+                        ? result.country.toLowerCase()
+                        : "";
+
+                const combined =
+                    `${name} ${admin1} ${admin2} ${country}`;
+
+                return queryParts.every(
+                    part =>
+                        combined.includes(part)
+                );
+            });
+
+        if (match) {
+            return match;
+        }
+    }
+
+
+    /* -----------------------------------------
+       6. Search every administrative field
+    ----------------------------------------- */
+
+    match =
+        results.find(result => {
+
+            const values = [
+                result.name,
+                result.admin1,
+                result.admin2,
+                result.admin3,
+                result.admin4,
+                result.country
+            ]
+                .filter(Boolean)
+                .map(value =>
+                    value.toLowerCase()
+                );
+
+            return values.some(value =>
+                value === normalizedQuery
+            );
+        });
+
+    if (match) {
+        return match;
+    }
+
+
+    /* -----------------------------------------
+       7. Fallback
+    ----------------------------------------- */
+
+    return results[0];
+}
 
 
 /* =========================================
    GET WEATHER DATA
 ========================================= */
-async function getWeather(city) {
 
-    // =========================================
-    // STEP 1: FIND CITY COORDINATES
-    // =========================================
+async function getWeather(searchQuery) {
 
-    const geoResponse = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`
-    );
+    const query =
+        searchQuery.trim();
+
+    if (!query) {
+        throw new Error(
+            "Please enter a location"
+        );
+    }
+
+
+    /* =========================================
+       STEP 1: FIND LOCATION
+    ========================================= */
+
+    const geoUrl =
+        `https://geocoding-api.open-meteo.com/v1/search` +
+        `?name=${encodeURIComponent(query)}` +
+        `&count=100` +
+        `&language=en` +
+        `&format=json`;
+
+    const geoResponse =
+        await fetch(geoUrl);
+
 
     if (!geoResponse.ok) {
-        throw new Error("Unable to connect to location service");
+
+        throw new Error(
+            "Unable to connect to location service"
+        );
     }
 
-    const geoData = await geoResponse.json();
 
-    if (!geoData.results || geoData.results.length === 0) {
-        throw new Error("City not found");
+    const geoData =
+        await geoResponse.json();
+
+
+    if (
+        !geoData.results ||
+        geoData.results.length === 0
+    ) {
+
+        throw new Error(
+            "Location not found"
+        );
     }
 
-    const location = geoData.results[0];
+
+    /* =========================================
+       STEP 2: FIND BEST MATCH
+    ========================================= */
+
+    const location =
+        findBestLocation(
+            geoData.results,
+            query
+        );
 
 
-    // =========================================
-    // STEP 2: GET WEATHER DATA
-    // =========================================
+    if (!location) {
+
+        throw new Error(
+            "Location not found"
+        );
+    }
+
+
+    /* =========================================
+       STEP 3: GET WEATHER
+    ========================================= */
 
     const weatherUrl =
         `https://api.open-meteo.com/v1/forecast` +
@@ -351,33 +611,58 @@ async function getWeather(city) {
         `&timezone=auto` +
         `&forecast_days=6`;
 
-    const weatherResponse = await fetch(weatherUrl);
+
+    const weatherResponse =
+        await fetch(weatherUrl);
+
 
     if (!weatherResponse.ok) {
+
         throw new Error(
             `Weather service error: ${weatherResponse.status}`
         );
     }
 
-    const weatherData = await weatherResponse.json();
+
+    const weatherData =
+        await weatherResponse.json();
 
 
-    // =========================================
-    // STEP 3: RETURN DATA
-    // =========================================
+    /* =========================================
+       STEP 4: RETURN DATA
+    ========================================= */
 
     return {
+
         location: {
-            name: location.name,
-            country: location.country,
-            country_code: location.country_code,
-            latitude: location.latitude,
-            longitude: location.longitude
+
+            name:
+                location.name,
+
+            country:
+                location.country,
+
+            country_code:
+                location.country_code,
+
+            admin1:
+                location.admin1 || "",
+
+            admin2:
+                location.admin2 || "",
+
+            latitude:
+                location.latitude,
+
+            longitude:
+                location.longitude
         },
 
-        weather: weatherData
+        weather:
+            weatherData
     };
 }
+
 
 /* =========================================
    GET CURRENT UV INDEX
@@ -393,13 +678,17 @@ function getCurrentUVIndex(data) {
         return null;
     }
 
+
     const currentTime =
         data.current.time;
 
+
     const currentHourIndex =
         data.hourly.time.findIndex(
-            time => time === currentTime
+            time =>
+                time === currentTime
         );
+
 
     if (currentHourIndex !== -1) {
 
@@ -407,6 +696,7 @@ function getCurrentUVIndex(data) {
             currentHourIndex
         ];
     }
+
 
     /*
        If exact time isn't found,
@@ -416,10 +706,12 @@ function getCurrentUVIndex(data) {
     const currentTimestamp =
         new Date(currentTime).getTime();
 
+
     let closestIndex = 0;
 
     let smallestDifference =
         Infinity;
+
 
     data.hourly.time.forEach(
         (time, index) => {
@@ -430,10 +722,12 @@ function getCurrentUVIndex(data) {
                     currentTimestamp
                 );
 
+
             if (
                 difference <
                 smallestDifference
             ) {
+
                 smallestDifference =
                     difference;
 
@@ -442,6 +736,7 @@ function getCurrentUVIndex(data) {
             }
         }
     );
+
 
     return data.hourly.uv_index[
         closestIndex
@@ -455,25 +750,33 @@ function getCurrentUVIndex(data) {
 
 function getUVDescription(value) {
 
-    if (value === null || value === undefined) {
+    if (
+        value === null ||
+        value === undefined
+    ) {
         return "Unavailable";
     }
+
 
     if (value <= 2) {
         return "Low";
     }
 
+
     if (value <= 5) {
         return "Moderate";
     }
+
 
     if (value <= 7) {
         return "High";
     }
 
+
     if (value <= 10) {
         return "Very High";
     }
+
 
     return "Extreme";
 }
@@ -483,10 +786,14 @@ function getUVDescription(value) {
    UPDATE CURRENT WEATHER
 ========================================= */
 
-function updateCurrentWeather(city, data) {
+function updateCurrentWeather(
+    location,
+    data
+) {
 
     const current =
         data.current;
+
 
     const weatherInfo =
         getWeatherInfo(
@@ -496,8 +803,29 @@ function updateCurrentWeather(city, data) {
 
     /* Location */
 
+    let displayLocation =
+        location.name;
+
+
+    if (location.admin1) {
+
+        displayLocation +=
+            `, ${location.admin1}`;
+    }
+
+
+    if (
+        location.country_code &&
+        location.country_code !== ""
+    ) {
+
+        displayLocation +=
+            `, ${location.country_code}`;
+    }
+
+
     cityName.textContent =
-        `${city.name}, ${city.country_code}`;
+        displayLocation;
 
 
     /* Date */
@@ -621,7 +949,10 @@ function updateCurrentWeather(city, data) {
     /* Update UV description */
 
     const uvCard =
-        uvIndex.closest(".detail-card");
+        uvIndex.closest(
+            ".detail-card"
+        );
+
 
     if (uvCard) {
 
@@ -629,6 +960,7 @@ function updateCurrentWeather(city, data) {
             uvCard.querySelector(
                 ".detail-description"
             );
+
 
         if (description) {
 
@@ -746,17 +1078,19 @@ function updateForecast(data) {
    SEARCH WEATHER
 ========================================= */
 
-async function searchWeather(city) {
+async function searchWeather(location) {
 
     showLoading();
 
+
     try {
 
-        // Ask our backend for weather
-        const data = await getWeather(city);
+        const data =
+            await getWeather(location);
 
 
-        // Update dashboard
+        /* Update dashboard */
+
         updateCurrentWeather(
             data.location,
             data.weather
@@ -768,12 +1102,15 @@ async function searchWeather(city) {
         );
 
 
-        // Hide loading
+        /* Hide loading */
+
         hideLoading();
 
 
-        // Show weather
+        /* Show weather */
+
         weatherError.hidden = true;
+
         weatherContent.hidden = false;
 
 
@@ -784,12 +1121,12 @@ async function searchWeather(city) {
             error
         );
 
+
+        hideLoading();
+
         showError();
     }
 }
-        
-
-      
 
 
 /* =========================================
@@ -803,7 +1140,7 @@ weatherForm.addEventListener(
         event.preventDefault();
 
 
-        const city =
+        const location =
             cityInput.value.trim();
 
 
@@ -811,12 +1148,13 @@ weatherForm.addEventListener(
            Validate empty input
         */
 
-        if (!city) {
+        if (!location) {
 
             searchError.textContent =
-                "Please enter a city name.";
+                "Please enter a location.";
 
-            searchError.hidden = false;
+            searchError.hidden =
+                false;
 
             cityInput.focus();
 
@@ -828,14 +1166,17 @@ weatherForm.addEventListener(
            Hide previous validation error
         */
 
-        searchError.hidden = true;
+        searchError.hidden =
+            true;
 
 
         /*
            Start weather search
         */
 
-        searchWeather(city);
+        searchWeather(
+            location
+        );
     }
 );
 
@@ -848,13 +1189,15 @@ retryBtn.addEventListener(
     "click",
     function () {
 
-        const city =
+        const location =
             cityInput.value.trim();
 
 
-        if (city) {
+        if (location) {
 
-            searchWeather(city);
+            searchWeather(
+                location
+            );
 
         } else {
 
@@ -862,6 +1205,4 @@ retryBtn.addEventListener(
         }
     }
 );
-
-
 
