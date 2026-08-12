@@ -316,30 +316,68 @@ function showError() {
 ========================================= */
 async function getWeather(city) {
 
-    const response = await fetch(
-        `/api/weather?city=${encodeURIComponent(city)}`
+    // =========================================
+    // STEP 1: FIND CITY COORDINATES
+    // =========================================
+
+    const geoResponse = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`
     );
 
-    const data = await response.json();
-
-    // keep the rest of your code below unchanged
-
-
-    if (!response.ok) {
-
-        throw new Error(
-            data.error || "Unable to fetch weather"
-        );
-
+    if (!geoResponse.ok) {
+        throw new Error("Unable to connect to location service");
     }
 
+    const geoData = await geoResponse.json();
 
-    return data;
+    if (!geoData.results || geoData.results.length === 0) {
+        throw new Error("City not found");
+    }
+
+    const location = geoData.results[0];
+
+
+    // =========================================
+    // STEP 2: GET WEATHER DATA
+    // =========================================
+
+    const weatherUrl =
+        `https://api.open-meteo.com/v1/forecast` +
+        `?latitude=${location.latitude}` +
+        `&longitude=${location.longitude}` +
+        `&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,surface_pressure,wind_speed_10m,visibility,cloud_cover` +
+        `&hourly=uv_index` +
+        `&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset` +
+        `&timezone=auto` +
+        `&forecast_days=6`;
+
+    const weatherResponse = await fetch(weatherUrl);
+
+    if (!weatherResponse.ok) {
+        throw new Error(
+            `Weather service error: ${weatherResponse.status}`
+        );
+    }
+
+    const weatherData = await weatherResponse.json();
+
+
+    // =========================================
+    // STEP 3: RETURN DATA
+    // =========================================
+
+    return {
+        location: {
+            name: location.name,
+            country: location.country,
+            country_code: location.country_code,
+            latitude: location.latitude,
+            longitude: location.longitude
+        },
+
+        weather: weatherData
+    };
 }
-
-      
-
-
 
 /* =========================================
    GET CURRENT UV INDEX
