@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "../frontend")));
 
 // =========================================
-// TEST / FRONTEND ROUTE
+// FRONTEND ROUTE
 // =========================================
 
 app.get("/", (req, res) => {
@@ -42,11 +42,12 @@ app.get("/api/weather", async (req, res) => {
         // STEP 1: FIND CITY COORDINATES
         // =========================================
 
-        const geoResponse = await fetch(
+        const geoUrl =
             `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(
                 city
-            )}&count=1&language=en&format=json`
-        );
+            )}&count=1&language=en&format=json`;
+
+        const geoResponse = await fetch(geoUrl);
 
         if (!geoResponse.ok) {
             console.error(
@@ -76,9 +77,35 @@ app.get("/api/weather", async (req, res) => {
         // STEP 2: GET WEATHER DATA
         // =========================================
 
-        const weatherResponse = await fetch(
-            `https://api.open-meteo.com/v1/forecast?latitude=${location.latitude}&longitude=${location.longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,surface_pressure,wind_speed_10m,visibility,cloud_cover&hourly=uv_index&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto&forecast_days=6`
-        );
+        const weatherUrl =
+            `https://api.open-meteo.com/v1/forecast?` +
+            `latitude=${location.latitude}` +
+            `&longitude=${location.longitude}` +
+            `&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,surface_pressure,wind_speed_10m,visibility,cloud_cover` +
+            `&hourly=uv_index` +
+            `&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset` +
+            `&timezone=auto` +
+            `&forecast_days=6`;
+
+        let weatherResponse = await fetch(weatherUrl);
+
+        // =========================================
+        // HANDLE RATE LIMIT
+        // =========================================
+
+        if (weatherResponse.status === 429) {
+            console.log(
+                "Open-Meteo rate limit reached. Retrying after 5 seconds..."
+            );
+
+            await new Promise(resolve => setTimeout(resolve, 5000));
+
+            weatherResponse = await fetch(weatherUrl);
+        }
+
+        // =========================================
+        // CHECK WEATHER RESPONSE
+        // =========================================
 
         if (!weatherResponse.ok) {
             console.error(
