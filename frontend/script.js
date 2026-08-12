@@ -317,11 +317,12 @@ function showError() {
 async function getWeather(city) {
 
     const response = await fetch(
-        `http://localhost:3000/api/weather?city=${encodeURIComponent(city)}`
+        `/api/weather?city=${encodeURIComponent(city)}`
     );
 
-
     const data = await response.json();
+
+    // keep the rest of your code below unchanged
 
 
     if (!response.ok) {
