@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "test": "jest",
-    "e2e": "playwright test"
-  },
+  "test": "jest tests",
+  "e2e": "playwright test"
+},
   "dependencies": {
     "cors": "^2.8.6",
     "express": "^5.2.1"
