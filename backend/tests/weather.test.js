@@ -1,5 +1,6 @@
 const request = require("supertest");
 const app = require("../app");
+const { mockLocationResponse } = require("./weather.fixture");
 
 let consoleErrorSpy;
 
@@ -135,17 +136,7 @@ test(
         jest.spyOn(global, "fetch")
             .mockResolvedValueOnce({
                 ok: true,
-                json: async () => ({
-                    results: [
-                        {
-                            name: "Kolkata",
-                            country: "India",
-                            country_code: "IN",
-                            latitude: 22.57,
-                            longitude: 88.36
-                        }
-                    ]
-                })
+                json: async () => mockLocationResponse
             })
             .mockResolvedValueOnce({
                 ok: false,
@@ -186,6 +177,9 @@ test(
 );
 
 
+// =========================================
+// LOWERCASE CITY
+// =========================================
 
 test("GET /api/weather works with lowercase city name", async () => {
 
