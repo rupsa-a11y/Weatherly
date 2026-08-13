@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Weatherly — real-time weather information, forecasts, and atmospheric conditions for any city."
+    >
 
     <title>Weatherly — Weather Dashboard</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet"
@@ -20,16 +27,17 @@
 <body>
 
     <!-- ================= HEADER ================= -->
+
     <header class="header">
         <div class="container header-content">
 
             <div class="logo">
-                <span class="logo-icon">☀</span>
+                <span class="logo-icon" aria-hidden="true">☀</span>
                 <span>Weatherly</span>
             </div>
 
             <div class="header-status">
-                <span class="status-dot"></span>
+                <span class="status-dot" aria-hidden="true"></span>
                 <span>Live Weather</span>
             </div>
 
@@ -38,13 +46,18 @@
 
 
     <!-- ================= MAIN ================= -->
+
     <main class="container main-content">
 
-        <!-- ===== HERO / SEARCH ===== -->
+        <!-- ================= HERO / SEARCH ================= -->
+
         <section class="hero">
 
             <div class="hero-text">
-                <p class="eyebrow">WEATHER DASHBOARD</p>
+
+                <p class="eyebrow">
+                    WEATHER DASHBOARD
+                </p>
 
                 <h1>
                     Know your weather.
@@ -55,17 +68,27 @@
                     Get real-time weather information, forecasts,
                     and atmospheric conditions for any city.
                 </p>
+
             </div>
 
 
-            <!-- Search Box -->
+            <!-- Search -->
+
             <div class="search-wrapper">
 
-                <form id="weather-form" class="search-form">
+                <form
+                    id="weather-form"
+                    class="search-form"
+                >
 
                     <div class="search-input-wrapper">
 
-                        <span class="search-icon">⌕</span>
+                        <span
+                            class="search-icon"
+                            aria-hidden="true"
+                        >
+                            ⌕
+                        </span>
 
                         <input
                             type="text"
@@ -78,14 +101,22 @@
 
                     </div>
 
-                    <button type="submit" id="search-btn">
+                    <button
+                        type="submit"
+                        id="search-btn"
+                    >
                         Search
                     </button>
 
                 </form>
 
-                <!-- Error Message -->
-                <p id="search-error" class="error-message" hidden>
+
+                <p
+                    id="search-error"
+                    class="error-message"
+                    role="alert"
+                    hidden
+                >
                     Please enter a valid city name.
                 </p>
 
@@ -95,28 +126,55 @@
 
 
         <!-- ================= LOADING STATE ================= -->
-        <section id="loading-state" class="loading-state" hidden>
 
-            <div class="loader"></div>
+        <section
+            id="loading-state"
+            class="loading-state"
+            aria-live="polite"
+            hidden
+        >
 
-            <p>Fetching latest weather...</p>
+            <div
+                class="loader"
+                aria-hidden="true"
+            ></div>
+
+            <p>
+                Fetching latest weather...
+            </p>
 
         </section>
 
 
         <!-- ================= ERROR STATE ================= -->
-        <section id="weather-error" class="weather-error" hidden>
 
-            <div class="error-icon">!</div>
+        <section
+            id="weather-error"
+            class="weather-error"
+            role="alert"
+            hidden
+        >
 
-            <h3>Unable to fetch weather</h3>
+            <div
+                class="error-icon"
+                aria-hidden="true"
+            >
+                !
+            </div>
+
+            <h3>
+                Unable to fetch weather
+            </h3>
 
             <p>
-                We couldn't find weather information for this location.
-                Please check the city name and try again.
+                We couldn't find weather information for this
+                location. Please check the city name and try again.
             </p>
 
-            <button id="retry-btn" class="secondary-btn">
+            <button
+                id="retry-btn"
+                class="secondary-btn"
+            >
                 Try Again
             </button>
 
@@ -124,16 +182,24 @@
 
 
         <!-- ================= WEATHER CONTENT ================= -->
-        <section id="weather-content" class="weather-content" hidden>
 
+        <section
+            id="weather-content"
+            class="weather-content"
+            hidden
+        >
 
-            <!-- ===== CURRENT WEATHER ===== -->
-            <div class="current-weather card">
+            <!-- ================= CURRENT WEATHER ================= -->
+
+            <section class="current-weather card">
 
                 <div class="location-info">
 
                     <div>
-                        <p class="label">CURRENT LOCATION</p>
+
+                        <p class="label">
+                            CURRENT LOCATION
+                        </p>
 
                         <h2 id="city-name">
                             Kolkata
@@ -142,46 +208,79 @@
                         <p id="date">
                             Wednesday, August 12
                         </p>
+
                     </div>
 
-                    <div class="weather-icon" id="weather-icon">
+
+                    <div
+                        class="weather-icon"
+                        id="weather-icon"
+                        aria-label="Current weather condition"
+                    >
                         ☀️
                     </div>
 
                 </div>
 
 
+                <!-- Main Temperature -->
+
                 <div class="temperature-section">
 
                     <div class="temperature">
-                        <span id="temperature">31</span>
-                        <span class="degree">°C</span>
+
+                        <span id="temperature">
+                            31
+                        </span>
+
+                        <span class="degree">
+                            °C
+                        </span>
+
                     </div>
 
+
                     <div class="weather-condition">
+
                         <h3 id="weather-condition">
                             Sunny
                         </h3>
 
                         <p>
                             Feels like
-                            <strong id="feels-like">33°C</strong>
+                            <strong id="feels-like">
+                                33°C
+                            </strong>
                         </p>
+
                     </div>
 
                 </div>
 
 
                 <!-- Weather Stats -->
+
                 <div class="weather-stats">
 
                     <div class="weather-stat">
 
-                        <span class="stat-icon">💧</span>
+                        <span
+                            class="stat-icon"
+                            aria-hidden="true"
+                        >
+                            💧
+                        </span>
 
                         <div>
-                            <p>Humidity</p>
-                            <strong id="humidity">68%</strong>
+
+                            <p>
+                                Humidity
+                            </p>
+
+                            <strong id="humidity">
+                                68%
+                            </strong>
+
                         </div>
 
                     </div>
@@ -189,11 +288,23 @@
 
                     <div class="weather-stat">
 
-                        <span class="stat-icon">💨</span>
+                        <span
+                            class="stat-icon"
+                            aria-hidden="true"
+                        >
+                            💨
+                        </span>
 
                         <div>
-                            <p>Wind</p>
-                            <strong id="wind">14 km/h</strong>
+
+                            <p>
+                                Wind
+                            </p>
+
+                            <strong id="wind">
+                                14 km/h
+                            </strong>
+
                         </div>
 
                     </div>
@@ -201,11 +312,23 @@
 
                     <div class="weather-stat">
 
-                        <span class="stat-icon">🌡️</span>
+                        <span
+                            class="stat-icon"
+                            aria-hidden="true"
+                        >
+                            🌡️
+                        </span>
 
                         <div>
-                            <p>Pressure</p>
-                            <strong id="pressure">1012 hPa</strong>
+
+                            <p>
+                                Pressure
+                            </p>
+
+                            <strong id="pressure">
+                                1012 hPa
+                            </strong>
+
                         </div>
 
                     </div>
@@ -213,28 +336,48 @@
 
                     <div class="weather-stat">
 
-                        <span class="stat-icon">👁️</span>
+                        <span
+                            class="stat-icon"
+                            aria-hidden="true"
+                        >
+                            👁️
+                        </span>
 
                         <div>
-                            <p>Visibility</p>
-                            <strong id="visibility">10 km</strong>
+
+                            <p>
+                                Visibility
+                            </p>
+
+                            <strong id="visibility">
+                                10 km
+                            </strong>
+
                         </div>
 
                     </div>
 
                 </div>
 
-            </div>
+            </section>
 
 
-            <!-- ===== SUN INFORMATION ===== -->
+            <!-- ================= SUNRISE / SUNSET ================= -->
+
             <section class="sun-section">
 
                 <div class="section-heading">
 
                     <div>
-                        <p class="eyebrow">DAYLIGHT</p>
-                        <h2>Sunrise & Sunset</h2>
+
+                        <p class="eyebrow">
+                            DAYLIGHT
+                        </p>
+
+                        <h2>
+                            Sunrise & Sunset
+                        </h2>
+
                     </div>
 
                 </div>
@@ -244,13 +387,23 @@
 
                     <div class="sun-card card">
 
-                        <div class="sun-icon">
+                        <div
+                            class="sun-icon"
+                            aria-hidden="true"
+                        >
                             🌅
                         </div>
 
                         <div>
-                            <p>Sunrise</p>
-                            <h3 id="sunrise">5:18 AM</h3>
+
+                            <p>
+                                Sunrise
+                            </p>
+
+                            <h3 id="sunrise">
+                                5:18 AM
+                            </h3>
+
                         </div>
 
                     </div>
@@ -258,13 +411,23 @@
 
                     <div class="sun-card card">
 
-                        <div class="sun-icon">
+                        <div
+                            class="sun-icon"
+                            aria-hidden="true"
+                        >
                             🌇
                         </div>
 
                         <div>
-                            <p>Sunset</p>
-                            <h3 id="sunset">6:21 PM</h3>
+
+                            <p>
+                                Sunset
+                            </p>
+
+                            <h3 id="sunset">
+                                6:21 PM
+                            </h3>
+
                         </div>
 
                     </div>
@@ -274,145 +437,56 @@
             </section>
 
 
-            <!-- ===== FORECAST ===== -->
+            <!-- ================= 5-DAY FORECAST ================= -->
+
             <section class="forecast-section">
 
                 <div class="section-heading">
 
                     <div>
-                        <p class="eyebrow">UPCOMING DAYS</p>
-                        <h2>5-Day Forecast</h2>
+
+                        <p class="eyebrow">
+                            UPCOMING DAYS
+                        </p>
+
+                        <h2>
+                            5-Day Forecast
+                        </h2>
+
                     </div>
 
                 </div>
 
 
-                <div id="forecast-container" class="forecast-grid">
+                <!--
+                    Forecast cards are generated dynamically
+                    by script.js.
+                -->
 
-
-                    <!-- Forecast Card -->
-                    <article class="forecast-card card">
-
-                        <p class="forecast-day">
-                            Thu
-                        </p>
-
-                        <span class="forecast-icon">
-                            ☀️
-                        </span>
-
-                        <div class="forecast-temperature">
-                            <strong>32°</strong>
-                            <span>25°</span>
-                        </div>
-
-                        <p class="forecast-condition">
-                            Sunny
-                        </p>
-
-                    </article>
-
-
-                    <article class="forecast-card card">
-
-                        <p class="forecast-day">
-                            Fri
-                        </p>
-
-                        <span class="forecast-icon">
-                            🌤️
-                        </span>
-
-                        <div class="forecast-temperature">
-                            <strong>31°</strong>
-                            <span>24°</span>
-                        </div>
-
-                        <p class="forecast-condition">
-                            Partly Cloudy
-                        </p>
-
-                    </article>
-
-
-                    <article class="forecast-card card">
-
-                        <p class="forecast-day">
-                            Sat
-                        </p>
-
-                        <span class="forecast-icon">
-                            🌧️
-                        </span>
-
-                        <div class="forecast-temperature">
-                            <strong>29°</strong>
-                            <span>23°</span>
-                        </div>
-
-                        <p class="forecast-condition">
-                            Light Rain
-                        </p>
-
-                    </article>
-
-
-                    <article class="forecast-card card">
-
-                        <p class="forecast-day">
-                            Sun
-                        </p>
-
-                        <span class="forecast-icon">
-                            ⛈️
-                        </span>
-
-                        <div class="forecast-temperature">
-                            <strong>28°</strong>
-                            <span>23°</span>
-                        </div>
-
-                        <p class="forecast-condition">
-                            Thunderstorm
-                        </p>
-
-                    </article>
-
-
-                    <article class="forecast-card card">
-
-                        <p class="forecast-day">
-                            Mon
-                        </p>
-
-                        <span class="forecast-icon">
-                            🌤️
-                        </span>
-
-                        <div class="forecast-temperature">
-                            <strong>30°</strong>
-                            <span>24°</span>
-                        </div>
-
-                        <p class="forecast-condition">
-                            Partly Cloudy
-                        </p>
-
-                    </article>
-
-                </div>
+                <div
+                    id="forecast-container"
+                    class="forecast-grid"
+                ></div>
 
             </section>
 
 
-            <!-- ===== EXTRA INFORMATION ===== -->
+            <!-- ================= WEATHER DETAILS ================= -->
+
             <section class="details-section">
 
                 <div class="section-heading">
 
                     <div>
-                        <p class="eyebrow">ATMOSPHERE</p>
-                        <h2>Weather Details</h2>
+
+                        <p class="eyebrow">
+                            ATMOSPHERE
+                        </p>
+
+                        <h2>
+                            Weather Details
+                        </h2>
+
                     </div>
 
                 </div>
@@ -421,11 +495,20 @@
                 <div class="details-grid">
 
 
+                    <!-- Humidity -->
+
                     <div class="detail-card card">
 
                         <div class="detail-top">
-                            <span>💧</span>
-                            <p>Humidity</p>
+
+                            <span aria-hidden="true">
+                                💧
+                            </span>
+
+                            <p>
+                                Humidity
+                            </p>
+
                         </div>
 
                         <h3 id="detail-humidity">
@@ -433,20 +516,31 @@
                         </h3>
 
                         <div class="progress-bar">
+
                             <div
                                 class="progress"
                                 style="width: 68%;"
                             ></div>
+
                         </div>
 
                     </div>
 
 
+                    <!-- Wind -->
+
                     <div class="detail-card card">
 
                         <div class="detail-top">
-                            <span>🌬️</span>
-                            <p>Wind Speed</p>
+
+                            <span aria-hidden="true">
+                                🌬️
+                            </span>
+
+                            <p>
+                                Wind Speed
+                            </p>
+
                         </div>
 
                         <h3 id="detail-wind">
@@ -460,11 +554,20 @@
                     </div>
 
 
+                    <!-- Cloud Cover -->
+
                     <div class="detail-card card">
 
                         <div class="detail-top">
-                            <span>☁️</span>
-                            <p>Cloud Cover</p>
+
+                            <span aria-hidden="true">
+                                ☁️
+                            </span>
+
+                            <p>
+                                Cloud Cover
+                            </p>
+
                         </div>
 
                         <h3 id="cloud-cover">
@@ -478,11 +581,20 @@
                     </div>
 
 
+                    <!-- UV Index -->
+
                     <div class="detail-card card">
 
                         <div class="detail-top">
-                            <span>🌡️</span>
-                            <p>UV Index</p>
+
+                            <span aria-hidden="true">
+                                🌡️
+                            </span>
+
+                            <p>
+                                UV Index
+                            </p>
+
                         </div>
 
                         <h3 id="uv-index">
@@ -506,6 +618,7 @@
 
 
     <!-- ================= FOOTER ================= -->
+
     <footer class="footer">
 
         <div class="container footer-content">
@@ -526,4 +639,5 @@
     <script src="script.js"></script>
 
 </body>
+
 </html>
