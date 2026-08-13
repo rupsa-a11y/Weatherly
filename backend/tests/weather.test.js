@@ -184,3 +184,19 @@ test(
             .toBe("City is required");
     }
 );
+
+
+
+test("GET /api/weather works with lowercase city name", async () => {
+
+    const response = await request(app)
+        .get("/api/weather?city=kolkata");
+
+    expect(response.statusCode).toBe(200);
+
+    expect(response.body.location.name)
+        .toBe("Kolkata");
+
+    expect(response.body.weather)
+        .toHaveProperty("current");
+});
