@@ -1,6 +1,18 @@
 const request = require("supertest");
 const app = require("../app");
 
+let consoleErrorSpy;
+
+beforeEach(() => {
+    consoleErrorSpy = jest
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
+});
+
+afterEach(() => {
+    jest.restoreAllMocks();
+});
+
 test("GET /api/weather returns 400 when city is missing", async () => {
 
     const response = await request(app)
@@ -63,8 +75,7 @@ test("GET /api/weather returns weather for Jaipur", async () => {
 
 
 test("GET /api/weather returns 502 when weather service fails", async () => {
-
-    global.fetch = jest.fn()
+jest.spyOn(global, "fetch")
         .mockResolvedValueOnce({
             ok: true,
             json: async () => ({
@@ -95,5 +106,5 @@ test("GET /api/weather returns 502 when weather service fails", async () => {
 
     expect(global.fetch).toHaveBeenCalledTimes(2);
 
-    global.fetch = undefined;
+    
 });
