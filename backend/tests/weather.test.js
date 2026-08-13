@@ -108,3 +108,13 @@ jest.spyOn(global, "fetch")
 
     
 });
+
+test("GET /api/weather returns 400 when city contains only spaces", async () => {
+
+    const response = await request(app)
+        .get("/api/weather?city=%20%20%20");
+
+    expect(response.statusCode).toBe(400);
+
+    expect(response.body.error).toBe("City is required");
+});

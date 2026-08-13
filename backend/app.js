@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/weather", async (req, res) => {
     try {
-        const city = req.query.city;
+        const city = req.query.city?.trim();
 
         // Check if city was provided
         if (!city) {
