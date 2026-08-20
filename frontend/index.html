@@ -102,55 +102,67 @@
 
 
             <!-- SEARCH -->
+<div class="search-wrapper">
 
-            <div class="search-wrapper">
+    <form
+        id="weather-form"
+        class="search-form"
+    >
 
-                <form
-                    id="weather-form"
-                    class="search-form"
-                >
+        <div class="search-input-wrapper">
 
-                    <div class="search-input-wrapper">
+            <span
+                class="search-icon"
+                aria-hidden="true"
+            >
+                ⌕
+            </span>
 
-                        <span
-                            class="search-icon"
-                            aria-hidden="true"
-                        >
-                            ⌕
-                        </span>
+            <input
+                type="text"
+                id="city-input"
+                name="city"
+                placeholder="Search for a city..."
+                autocomplete="off"
+                aria-label="City name"
+            >
 
-                        <input
-                            type="text"
-                            id="city-input"
-                            name="city"
-                            placeholder="Search for a city..."
-                            autocomplete="off"
-                            aria-label="City name"
-                        >
+        </div>
 
-                    </div>
+        <button
+            type="submit"
+            id="search-btn"
+        >
+            Search
+        </button>
 
-
-                    <button
-                        type="submit"
-                        id="search-btn"
-                    >
-                        Search
-                    </button>
-
-                </form>
+    </form>
 
 
-                <p
-                    id="search-error"
-                    class="error-message"
-                    role="alert"
-                    hidden
-                >
-                    Please enter a valid city name.
-                </p>
+    <button
+        type="button"
+        id="location-btn"
+        class="location-btn"
+    >
+        📍 Use My Location
+    </button>
 
-            </div>
+
+    <p
+        id="search-error"
+        class="error-message"
+        role="alert"
+        hidden
+    >
+        Please enter a valid city name.
+    </p>
+
+</div>
+            
+
+                
+
+             
 
         </section>
 
