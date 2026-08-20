@@ -29,6 +29,7 @@
     <!-- ================= HEADER ================= -->
 
     <header class="header">
+
         <div class="container header-content">
 
             <div class="logo">
@@ -37,11 +38,16 @@
             </div>
 
             <div class="header-status">
-                <span class="status-dot" aria-hidden="true"></span>
+                <span
+                    class="status-dot"
+                    aria-hidden="true"
+                ></span>
+
                 <span>Live Weather</span>
             </div>
 
         </div>
+
     </header>
 
 
@@ -206,11 +212,10 @@
                         </h2>
 
                         <p id="date">
-                            Wednesday, August 12
+                            Thursday, August 20
                         </p>
 
                     </div>
-
 
                     <div
                         class="weather-icon"
@@ -437,7 +442,40 @@
             </section>
 
 
-            <!-- ================= 5-DAY FORECAST ================= -->
+            <!-- ================= HOURLY FORECAST ================= -->
+
+            <section
+                id="hourly-section"
+                class="hourly-section"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <p class="eyebrow">
+                            NEXT 24 HOURS
+                        </p>
+
+                        <h2>
+                            Hourly Forecast
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="hourly-container"
+                    class="hourly-container"
+                    aria-label="Hourly weather forecast"
+                ></div>
+
+            </section>
+
+
+            <!-- ================= 7-DAY FORECAST ================= -->
 
             <section class="forecast-section">
 
@@ -450,18 +488,13 @@
                         </p>
 
                         <h2>
-                            5-Day Forecast
+                            7-Day Forecast
                         </h2>
 
                     </div>
 
                 </div>
 
-
-                <!--
-                    Forecast cards are generated dynamically
-                    by script.js.
-                -->
 
                 <div
                     id="forecast-container"
@@ -518,6 +551,7 @@
                         <div class="progress-bar">
 
                             <div
+                                id="humidity-progress"
                                 class="progress"
                                 style="width: 68%;"
                             ></div>
@@ -547,7 +581,10 @@
                             14 km/h
                         </h3>
 
-                        <p class="detail-description">
+                        <p
+                            id="wind-description"
+                            class="detail-description"
+                        >
                             Moderate breeze
                         </p>
 
@@ -574,7 +611,10 @@
                             18%
                         </h3>
 
-                        <p class="detail-description">
+                        <p
+                            id="cloud-description"
+                            class="detail-description"
+                        >
                             Mostly clear
                         </p>
 
@@ -588,7 +628,7 @@
                         <div class="detail-top">
 
                             <span aria-hidden="true">
-                                🌡️
+                                ☀️
                             </span>
 
                             <p>
@@ -601,12 +641,14 @@
                             7
                         </h3>
 
-                        <p class="detail-description">
+                        <p
+                            id="uv-description"
+                            class="detail-description"
+                        >
                             High
                         </p>
 
                     </div>
-
 
                 </div>
 

@@ -1,4 +1,9 @@
 /* =========================
+   WEATHERLY - WEATHER DASHBOARD
+   UPDATED STYLES
+========================= */
+
+/* =========================
    GLOBAL RESET
 ========================= */
 
@@ -647,6 +652,7 @@ button:disabled {
 ========================= */
 
 .sun-section,
+.hourly-section,
 .forecast-section,
 .details-section {
     margin-top: 58px;
@@ -723,21 +729,119 @@ button:disabled {
 
 
 /* =========================
+   HOURLY FORECAST
+========================= */
+
+.hourly-container {
+    display: flex;
+
+    gap: 12px;
+
+    overflow-x: auto;
+
+    padding: 4px 2px 14px;
+
+    scroll-behavior: smooth;
+
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
+}
+
+.hourly-container::-webkit-scrollbar {
+    height: 7px;
+}
+
+.hourly-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.hourly-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+
+    border-radius: 20px;
+}
+
+.hourly-card {
+    min-width: 108px;
+
+    padding: 20px 14px;
+
+    flex-shrink: 0;
+
+    text-align: center;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #fafbff
+        );
+}
+
+.hourly-card:hover {
+    transform: translateY(-4px);
+}
+
+.hourly-time {
+    margin-bottom: 14px;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.hourly-icon {
+    display: block;
+
+    margin-bottom: 14px;
+
+    font-size: 30px;
+}
+
+.hourly-temperature {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-size: 19px;
+
+    letter-spacing: -0.4px;
+}
+
+.hourly-rain {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 4px;
+
+    color: var(--accent);
+
+    font-size: 11px;
+    font-weight: 500;
+}
+
+
+/* =========================
    FORECAST
 ========================= */
 
 .forecast-grid {
     display: grid;
 
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 
-    gap: 14px;
+    gap: 12px;
 }
 
 .forecast-card {
-    padding: 24px 15px;
+    padding: 22px 12px;
 
     text-align: center;
+
+    overflow: hidden;
 }
 
 .forecast-card:hover {
@@ -745,11 +849,11 @@ button:disabled {
 }
 
 .forecast-day {
-    margin-bottom: 17px;
+    margin-bottom: 15px;
 
     color: var(--text-secondary);
 
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
 
     text-transform: uppercase;
@@ -760,9 +864,9 @@ button:disabled {
 .forecast-icon {
     display: block;
 
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 
-    font-size: 35px;
+    font-size: 32px;
 }
 
 .forecast-temperature {
@@ -775,7 +879,7 @@ button:disabled {
 }
 
 .forecast-temperature strong {
-    font-size: 20px;
+    font-size: 19px;
 
     letter-spacing: -0.4px;
 }
@@ -783,7 +887,7 @@ button:disabled {
 .forecast-temperature span {
     color: var(--text-light);
 
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .forecast-condition {
@@ -791,13 +895,22 @@ button:disabled {
 
     color: var(--text-secondary);
 
-    font-size: 11px;
+    font-size: 10px;
 
     white-space: nowrap;
 
     overflow: hidden;
 
     text-overflow: ellipsis;
+}
+
+.forecast-rain {
+    margin-top: 10px;
+
+    color: var(--accent);
+
+    font-size: 10px;
+    font-weight: 600;
 }
 
 
@@ -1034,6 +1147,14 @@ button:disabled {
    TABLET
 ========================= */
 
+@media (max-width: 1050px) {
+
+    .forecast-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+
 @media (max-width: 900px) {
 
     .weather-stats {
@@ -1179,6 +1300,16 @@ button:disabled {
         grid-template-columns: 1fr;
     }
 
+    .hourly-container {
+        margin-right: -14px;
+
+        padding-right: 14px;
+    }
+
+    .hourly-card {
+        min-width: 92px;
+    }
+
     .forecast-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -1240,6 +1371,10 @@ button:disabled {
 
     .weather-stat {
         gap: 8px;
+    }
+
+    .hourly-card {
+        min-width: 88px;
     }
 }
 
