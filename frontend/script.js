@@ -2,11 +2,6 @@
    WEATHERLY - WEATHER DASHBOARD
 ========================================= */
 
-
-/* =========================================
-   DOM ELEMENTS
-========================================= */
-
 const weatherForm =
     document.getElementById("weather-form");
 
@@ -265,15 +260,12 @@ function getWeatherInfo(code) {
 
 
 /* =========================================
-   FORMAT DATE
+   DATE / TIME HELPERS
 ========================================= */
 
 function formatDate(dateString) {
 
-    const date =
-        new Date(dateString);
-
-    return date.toLocaleDateString(
+    return new Date(dateString).toLocaleDateString(
         "en-US",
         {
             weekday: "long",
@@ -284,16 +276,9 @@ function formatDate(dateString) {
 }
 
 
-/* =========================================
-   FORMAT TIME
-========================================= */
-
 function formatTime(timeString) {
 
-    const date =
-        new Date(timeString);
-
-    return date.toLocaleTimeString(
+    return new Date(timeString).toLocaleTimeString(
         "en-US",
         {
             hour: "numeric",
@@ -303,16 +288,9 @@ function formatTime(timeString) {
 }
 
 
-/* =========================================
-   FORMAT HOUR
-========================================= */
-
 function formatHour(timeString) {
 
-    const date =
-        new Date(timeString);
-
-    return date.toLocaleTimeString(
+    return new Date(timeString).toLocaleTimeString(
         "en-US",
         {
             hour: "numeric"
@@ -321,16 +299,9 @@ function formatHour(timeString) {
 }
 
 
-/* =========================================
-   GET DAY NAME
-========================================= */
-
 function getDayName(dateString) {
 
-    const date =
-        new Date(dateString);
-
-    return date.toLocaleDateString(
+    return new Date(dateString).toLocaleDateString(
         "en-US",
         {
             weekday: "short"
@@ -340,7 +311,7 @@ function getDayName(dateString) {
 
 
 /* =========================================
-   SHOW LOADING STATE
+   UI STATES
 ========================================= */
 
 function showLoading() {
@@ -355,14 +326,9 @@ function showLoading() {
 
     searchBtn.disabled = true;
 
-    searchBtn.textContent =
-        "Searching...";
+    searchBtn.textContent = "Searching...";
 }
 
-
-/* =========================================
-   HIDE LOADING STATE
-========================================= */
 
 function hideLoading() {
 
@@ -370,14 +336,9 @@ function hideLoading() {
 
     searchBtn.disabled = false;
 
-    searchBtn.textContent =
-        "Search";
+    searchBtn.textContent = "Search";
 }
 
-
-/* =========================================
-   SHOW ERROR STATE
-========================================= */
 
 function showError(message = null) {
 
@@ -389,8 +350,7 @@ function showError(message = null) {
 
     searchBtn.disabled = false;
 
-    searchBtn.textContent =
-        "Search";
+    searchBtn.textContent = "Search";
 
     if (message) {
 
@@ -405,186 +365,6 @@ function showError(message = null) {
 
 
 /* =========================================
-   FIND BEST LOCATION MATCH
-========================================= */
-
-function findBestLocation(
-    results,
-    searchQuery
-) {
-
-    const query =
-        searchQuery
-            .trim()
-            .toLowerCase();
-
-
-    /*
-       Remove punctuation and normalize
-       multiple spaces.
-    */
-
-    const normalizedQuery =
-        query
-            .replace(/,/g, " ")
-            .replace(/\s+/g, " ")
-            .trim();
-
-
-    /* -----------------------------------------
-       1. Exact location name
-    ----------------------------------------- */
-
-    let match =
-        results.find(result =>
-            result.name &&
-            result.name
-                .toLowerCase() === normalizedQuery
-        );
-
-    if (match) {
-        return match;
-    }
-
-
-    /* -----------------------------------------
-       2. Exact country
-    ----------------------------------------- */
-
-    match =
-        results.find(result =>
-            result.country &&
-            result.country
-                .toLowerCase() === normalizedQuery
-        );
-
-    if (match) {
-        return match;
-    }
-
-
-    /* -----------------------------------------
-       3. Exact state
-    ----------------------------------------- */
-
-    match =
-        results.find(result =>
-            result.admin1 &&
-            result.admin1
-                .toLowerCase() === normalizedQuery
-        );
-
-    if (match) {
-        return match;
-    }
-
-
-    /* -----------------------------------------
-       4. Exact admin2
-    ----------------------------------------- */
-
-    match =
-        results.find(result =>
-            result.admin2 &&
-            result.admin2
-                .toLowerCase() === normalizedQuery
-        );
-
-    if (match) {
-        return match;
-    }
-
-
-    /* -----------------------------------------
-       5. Search city + state + country
-    ----------------------------------------- */
-
-    const queryParts =
-        normalizedQuery
-            .split(" ")
-            .filter(Boolean);
-
-    if (queryParts.length >= 2) {
-
-        match =
-            results.find(result => {
-
-                const name =
-                    result.name
-                        ? result.name.toLowerCase()
-                        : "";
-
-                const admin1 =
-                    result.admin1
-                        ? result.admin1.toLowerCase()
-                        : "";
-
-                const admin2 =
-                    result.admin2
-                        ? result.admin2.toLowerCase()
-                        : "";
-
-                const country =
-                    result.country
-                        ? result.country.toLowerCase()
-                        : "";
-
-                const combined =
-                    `${name} ${admin1} ${admin2} ${country}`;
-
-                return queryParts.every(
-                    part =>
-                        combined.includes(part)
-                );
-
-            });
-
-        if (match) {
-            return match;
-        }
-    }
-
-
-    /* -----------------------------------------
-       6. Search administrative fields
-    ----------------------------------------- */
-
-    match =
-        results.find(result => {
-
-            const values = [
-                result.name,
-                result.admin1,
-                result.admin2,
-                result.admin3,
-                result.admin4,
-                result.country
-            ]
-                .filter(Boolean)
-                .map(value =>
-                    value.toLowerCase()
-                );
-
-            return values.some(value =>
-                value === normalizedQuery
-            );
-
-        });
-
-    if (match) {
-        return match;
-    }
-
-
-    /* -----------------------------------------
-       7. Fallback
-    ----------------------------------------- */
-
-    return results[0];
-}
-
-
-/* =========================================
    GET WEATHER DATA
 ========================================= */
 
@@ -594,195 +374,33 @@ async function getWeather(searchQuery) {
         searchQuery.trim();
 
     if (!query) {
-
         throw new Error(
             "Please enter a location"
         );
     }
 
+    const response =
+        await fetch(
+            `/api/weather?city=${encodeURIComponent(query)}`
+        );
 
-    /* =========================================
-       STEP 1: FIND LOCATION
-    ========================================= */
+    const data =
+        await response.json();
 
-    const geoUrl =
-        `https://geocoding-api.open-meteo.com/v1/search` +
-        `?name=${encodeURIComponent(query)}` +
-        `&count=100` +
-        `&language=en` +
-        `&format=json`;
-
-    const geoResponse =
-        await fetch(geoUrl);
-
-
-    if (!geoResponse.ok) {
+    if (!response.ok) {
 
         throw new Error(
-            "Unable to connect to location service"
+            data.error ||
+            "Unable to fetch weather"
         );
     }
 
-
-    const geoData =
-        await geoResponse.json();
-
-
-    if (
-        !geoData.results ||
-        geoData.results.length === 0
-    ) {
-
-        throw new Error(
-            "Location not found"
-        );
-    }
-
-
-    /* =========================================
-       STEP 2: FIND BEST MATCH
-    ========================================= */
-
-    const location =
-        findBestLocation(
-            geoData.results,
-            query
-        );
-
-
-    if (!location) {
-
-        throw new Error(
-            "Location not found"
-        );
-    }
-
-
-    /* =========================================
-       STEP 3: GET WEATHER
-    ========================================= */
-
-    const weatherParams =
-        new URLSearchParams({
-
-            latitude:
-                location.latitude,
-
-            longitude:
-                location.longitude,
-
-            current: [
-                "temperature_2m",
-                "relative_humidity_2m",
-                "apparent_temperature",
-                "weather_code",
-                "surface_pressure",
-                "wind_speed_10m",
-                "wind_direction_10m",
-                "visibility",
-                "cloud_cover",
-                "precipitation",
-                "rain",
-                "showers"
-            ].join(","),
-
-            hourly: [
-                "temperature_2m",
-                "apparent_temperature",
-                "relative_humidity_2m",
-                "precipitation_probability",
-                "precipitation",
-                "rain",
-                "weather_code",
-                "wind_speed_10m",
-                "wind_direction_10m",
-                "uv_index",
-                "visibility",
-                "cloud_cover"
-            ].join(","),
-
-            daily: [
-                "weather_code",
-                "temperature_2m_max",
-                "temperature_2m_min",
-                "apparent_temperature_max",
-                "apparent_temperature_min",
-                "sunrise",
-                "sunset",
-                "uv_index_max",
-                "precipitation_sum",
-                "rain_sum",
-                "precipitation_probability_max",
-                "wind_speed_10m_max",
-                "wind_direction_10m_dominant"
-            ].join(","),
-
-            timezone: "auto",
-
-            forecast_days: "7"
-
-        });
-
-
-    const weatherUrl =
-        `https://api.open-meteo.com/v1/forecast?${weatherParams.toString()}`;
-
-
-    const weatherResponse =
-        await fetch(weatherUrl);
-
-
-    if (!weatherResponse.ok) {
-
-        throw new Error(
-            `Weather service error: ${weatherResponse.status}`
-        );
-    }
-
-
-    const weatherData =
-        await weatherResponse.json();
-
-
-    /* =========================================
-       STEP 4: RETURN DATA
-    ========================================= */
-
-    return {
-
-        location: {
-
-            name:
-                location.name,
-
-            country:
-                location.country,
-
-            country_code:
-                location.country_code,
-
-            admin1:
-                location.admin1 || "",
-
-            admin2:
-                location.admin2 || "",
-
-            latitude:
-                location.latitude,
-
-            longitude:
-                location.longitude
-        },
-
-        weather:
-            weatherData
-
-    };
+    return data;
 }
 
 
 /* =========================================
-   GET CURRENT UV INDEX
+   UV HELPERS
 ========================================= */
 
 function getCurrentUVIndex(data) {
@@ -795,73 +413,21 @@ function getCurrentUVIndex(data) {
         return null;
     }
 
-
     const currentTime =
         data.current.time;
 
-
-    const currentHourIndex =
+    let index =
         data.hourly.time.findIndex(
-            time =>
-                time === currentTime
+            time => time === currentTime
         );
 
-
-    if (currentHourIndex !== -1) {
-
-        return data.hourly.uv_index[
-            currentHourIndex
-        ];
+    if (index === -1) {
+        index = 0;
     }
 
-
-    /* Find closest available hour */
-
-    const currentTimestamp =
-        new Date(currentTime).getTime();
-
-
-    let closestIndex = 0;
-
-    let smallestDifference =
-        Infinity;
-
-
-    data.hourly.time.forEach(
-        (time, index) => {
-
-            const difference =
-                Math.abs(
-                    new Date(time).getTime() -
-                    currentTimestamp
-                );
-
-
-            if (
-                difference <
-                smallestDifference
-            ) {
-
-                smallestDifference =
-                    difference;
-
-                closestIndex =
-                    index;
-            }
-
-        }
-    );
-
-
-    return data.hourly.uv_index[
-        closestIndex
-    ];
+    return data.hourly.uv_index[index];
 }
 
-
-/* =========================================
-   GET UV DESCRIPTION
-========================================= */
 
 function getUVDescription(value) {
 
@@ -872,33 +438,28 @@ function getUVDescription(value) {
         return "Unavailable";
     }
 
-
     if (value <= 2) {
         return "Low";
     }
-
 
     if (value <= 5) {
         return "Moderate";
     }
 
-
     if (value <= 7) {
         return "High";
     }
 
-
     if (value <= 10) {
         return "Very High";
     }
-
 
     return "Extreme";
 }
 
 
 /* =========================================
-   GET WIND DESCRIPTION
+   WIND / CLOUD HELPERS
 ========================================= */
 
 function getWindDescription(speed) {
@@ -923,10 +484,6 @@ function getWindDescription(speed) {
 }
 
 
-/* =========================================
-   GET CLOUD DESCRIPTION
-========================================= */
-
 function getCloudDescription(value) {
 
     if (value < 10) {
@@ -946,7 +503,7 @@ function getCloudDescription(value) {
 
 
 /* =========================================
-   UPDATE CURRENT WEATHER
+   CURRENT WEATHER
 ========================================= */
 
 function updateCurrentWeather(
@@ -957,18 +514,14 @@ function updateCurrentWeather(
     const current =
         data.current;
 
-
     const weatherInfo =
         getWeatherInfo(
             current.weather_code
         );
 
 
-    /* Location */
-
     let displayLocation =
         location.name;
-
 
     if (location.admin1) {
 
@@ -976,11 +529,7 @@ function updateCurrentWeather(
             `, ${location.admin1}`;
     }
 
-
-    if (
-        location.country_code &&
-        location.country_code !== ""
-    ) {
+    if (location.country_code) {
 
         displayLocation +=
             `, ${location.country_code}`;
@@ -991,15 +540,11 @@ function updateCurrentWeather(
         displayLocation;
 
 
-    /* Date */
-
     dateElement.textContent =
         formatDate(
             current.time
         );
 
-
-    /* Temperature */
 
     temperature.textContent =
         Math.round(
@@ -1007,33 +552,23 @@ function updateCurrentWeather(
         );
 
 
-    /* Feels Like */
-
     feelsLike.textContent =
         `${Math.round(
             current.apparent_temperature
         )}°C`;
 
 
-    /* Weather Condition */
-
     weatherCondition.textContent =
         weatherInfo.condition;
 
-
-    /* Weather Icon */
 
     weatherIcon.textContent =
         weatherInfo.icon;
 
 
-    /* Humidity */
-
     humidity.textContent =
         `${current.relative_humidity_2m}%`;
 
-
-    /* Wind */
 
     wind.textContent =
         `${Math.round(
@@ -1041,15 +576,11 @@ function updateCurrentWeather(
         )} km/h`;
 
 
-    /* Pressure */
-
     pressure.textContent =
         `${Math.round(
             current.surface_pressure
         )} hPa`;
 
-
-    /* Visibility */
 
     visibility.textContent =
         `${(
@@ -1057,15 +588,11 @@ function updateCurrentWeather(
         ).toFixed(1)} km`;
 
 
-    /* Sunrise */
-
     sunrise.textContent =
         formatTime(
             data.daily.sunrise[0]
         );
 
-
-    /* Sunset */
 
     sunset.textContent =
         formatTime(
@@ -1073,9 +600,9 @@ function updateCurrentWeather(
         );
 
 
-    /* =====================================
-       WEATHER DETAILS
-    ===================================== */
+    /* =========================
+       DETAILS
+    ========================== */
 
     const humidityValue =
         current.relative_humidity_2m;
@@ -1083,14 +610,14 @@ function updateCurrentWeather(
     detailHumidity.textContent =
         `${humidityValue}%`;
 
-    if (humidityProgress) {
-
-        humidityProgress.style.width =
-            `${Math.min(
-                100,
-                Math.max(0, humidityValue)
-            )}%`;
-    }
+    humidityProgress.style.width =
+        `${Math.min(
+            100,
+            Math.max(
+                0,
+                humidityValue
+            )
+        )}%`;
 
 
     const windSpeed =
@@ -1101,13 +628,10 @@ function updateCurrentWeather(
     detailWind.textContent =
         `${windSpeed} km/h`;
 
-    if (windDescription) {
-
-        windDescription.textContent =
-            getWindDescription(
-                windSpeed
-            );
-    }
+    windDescription.textContent =
+        getWindDescription(
+            windSpeed
+        );
 
 
     const cloudValue =
@@ -1116,70 +640,48 @@ function updateCurrentWeather(
     cloudCover.textContent =
         `${cloudValue}%`;
 
-    if (cloudDescription) {
+    cloudDescription.textContent =
+        getCloudDescription(
+            cloudValue
+        );
 
-        cloudDescription.textContent =
-            getCloudDescription(
-                cloudValue
-            );
-    }
-
-
-    /* UV Index */
 
     const uvValue =
         getCurrentUVIndex(data);
 
+    uvIndex.textContent =
+        uvValue === null
+            ? "N/A"
+            : Number(uvValue).toFixed(1);
 
-    if (uvValue !== null) {
-
-        uvIndex.textContent =
-            Number(uvValue).toFixed(1);
-
-    } else {
-
-        uvIndex.textContent =
-            "N/A";
-    }
-
-
-    if (uvDescription) {
-
-        uvDescription.textContent =
-            getUVDescription(
-                uvValue
-            );
-    }
+    uvDescription.textContent =
+        getUVDescription(
+            uvValue
+        );
 }
 
 
 /* =========================================
-   UPDATE HOURLY FORECAST
+   HOURLY FORECAST
 ========================================= */
 
 function updateHourlyForecast(data) {
 
     hourlyContainer.innerHTML = "";
 
-
     if (
         !data.hourly ||
         !data.hourly.time ||
         !data.hourly.temperature_2m
     ) {
-
         return;
     }
-
-
-    const currentTime =
-        data.current.time;
 
 
     let startIndex =
         data.hourly.time.findIndex(
             time =>
-                time === currentTime
+                time === data.current.time
         );
 
 
@@ -1193,34 +695,20 @@ function updateHourlyForecast(data) {
 
     for (
         let i = startIndex;
-        i < startIndex + hoursToShow &&
-        i < data.hourly.time.length;
+
+        i <
+            startIndex +
+            hoursToShow &&
+        i <
+            data.hourly.time.length;
+
         i++
     ) {
 
-        const time =
-            data.hourly.time[i];
-
-
-        const temperatureValue =
-            Math.round(
-                data.hourly.temperature_2m[i]
-            );
-
-
-        const weatherCode =
-            data.hourly.weather_code[i];
-
-
         const weatherInfo =
             getWeatherInfo(
-                weatherCode
+                data.hourly.weather_code[i]
             );
-
-
-        const rainProbability =
-            data.hourly
-                .precipitation_probability[i];
 
 
         const card =
@@ -1236,7 +724,11 @@ function updateHourlyForecast(data) {
         card.innerHTML = `
 
             <p class="hourly-time">
-                ${formatHour(time)}
+                ${
+                    formatHour(
+                        data.hourly.time[i]
+                    )
+                }
             </p>
 
             <span
@@ -1246,8 +738,15 @@ function updateHourlyForecast(data) {
                 ${weatherInfo.icon}
             </span>
 
-            <strong class="hourly-temperature">
-                ${temperatureValue}°
+            <strong
+                class="hourly-temperature"
+            >
+                ${
+                    Math.round(
+                        data.hourly
+                            .temperature_2m[i]
+                    )
+                }°
             </strong>
 
             <div class="hourly-rain">
@@ -1257,11 +756,14 @@ function updateHourlyForecast(data) {
                 </span>
 
                 <span>
-                    ${rainProbability ?? 0}%
+                    ${
+                        data.hourly
+                            .precipitation_probability[i]
+                        ?? 0
+                    }%
                 </span>
 
             </div>
-
         `;
 
 
@@ -1273,13 +775,12 @@ function updateHourlyForecast(data) {
 
 
 /* =========================================
-   UPDATE 7-DAY FORECAST
+   7-DAY FORECAST
 ========================================= */
 
 function updateForecast(data) {
 
     forecastContainer.innerHTML = "";
-
 
     if (
         !data.daily ||
@@ -1289,13 +790,7 @@ function updateForecast(data) {
     }
 
 
-    /*
-       Index 0 is today.
-       We display the next 6 days,
-       giving us a 7-day view including today.
-    */
-
-    const forecastDays =
+    const days =
         Math.min(
             data.daily.time.length,
             7
@@ -1304,41 +799,34 @@ function updateForecast(data) {
 
     for (
         let i = 0;
-        i < forecastDays;
+        i < days;
         i++
     ) {
 
-        const date =
-            data.daily.time[i];
-
-
-        const weatherCode =
-            data.daily.weather_code[i];
-
-
         const weatherInfo =
             getWeatherInfo(
-                weatherCode
+                data.daily.weather_code[i]
             );
 
 
-        const maxTemperature =
+        const max =
             Math.round(
                 data.daily
                     .temperature_2m_max[i]
             );
 
 
-        const minTemperature =
+        const min =
             Math.round(
                 data.daily
                     .temperature_2m_min[i]
             );
 
 
-        const rainProbability =
+        const rain =
             data.daily
-                .precipitation_probability_max?.[i] ?? 0;
+                .precipitation_probability_max?.[i]
+            ?? 0;
 
 
         const card =
@@ -1351,17 +839,20 @@ function updateForecast(data) {
             "forecast-card card";
 
 
-        const dayLabel =
-            i === 0
-                ? "Today"
-                : getDayName(date);
-
-
         card.innerHTML = `
 
             <p class="forecast-day">
-                ${dayLabel}
+
+                ${
+                    i === 0
+                        ? "Today"
+                        : getDayName(
+                            data.daily.time[i]
+                        )
+                }
+
             </p>
+
 
             <span
                 class="forecast-icon"
@@ -1370,24 +861,29 @@ function updateForecast(data) {
                 ${weatherInfo.icon}
             </span>
 
-            <div class="forecast-temperature">
+
+            <div
+                class="forecast-temperature"
+            >
 
                 <strong>
-                    ${maxTemperature}°
+                    ${max}°
                 </strong>
 
                 <span>
-                    ${minTemperature}°
+                    ${min}°
                 </span>
 
             </div>
+
 
             <p class="forecast-condition">
                 ${weatherInfo.condition}
             </p>
 
+
             <p class="forecast-rain">
-                💧 ${rainProbability}%
+                💧 ${rain}%
             </p>
 
         `;
@@ -1404,7 +900,9 @@ function updateForecast(data) {
    SEARCH WEATHER
 ========================================= */
 
-async function searchWeather(location) {
+async function searchWeather(
+    location
+) {
 
     showLoading();
 
@@ -1417,38 +915,30 @@ async function searchWeather(location) {
             );
 
 
-        /* Update current weather */
-
         updateCurrentWeather(
             data.location,
             data.weather
         );
 
 
-        /* Update hourly forecast */
-
         updateHourlyForecast(
             data.weather
         );
 
-
-        /* Update 7-day forecast */
 
         updateForecast(
             data.weather
         );
 
 
-        /* Hide loading */
-
         hideLoading();
 
 
-        /* Show weather */
+        weatherError.hidden =
+            true;
 
-        weatherError.hidden = true;
-
-        weatherContent.hidden = false;
+        weatherContent.hidden =
+            false;
 
 
     } catch (error) {
@@ -1476,7 +966,7 @@ async function searchWeather(location) {
 
 weatherForm.addEventListener(
     "submit",
-    function (event) {
+    event => {
 
         event.preventDefault();
 
@@ -1484,8 +974,6 @@ weatherForm.addEventListener(
         const location =
             cityInput.value.trim();
 
-
-        /* Validate empty input */
 
         if (!location) {
 
@@ -1501,29 +989,24 @@ weatherForm.addEventListener(
         }
 
 
-        /* Hide previous validation error */
-
         searchError.hidden =
             true;
 
 
-        /* Start weather search */
-
         searchWeather(
             location
         );
-
     }
 );
 
 
 /* =========================================
-   RETRY BUTTON
+   RETRY
 ========================================= */
 
 retryBtn.addEventListener(
     "click",
-    function () {
+    () => {
 
         const location =
             cityInput.value.trim();
@@ -1538,8 +1021,6 @@ retryBtn.addEventListener(
         } else {
 
             cityInput.focus();
-
         }
-
     }
 );

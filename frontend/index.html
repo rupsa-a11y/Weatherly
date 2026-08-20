@@ -12,7 +12,6 @@
 
     <title>Weatherly — Weather Dashboard</title>
 
-    <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -26,24 +25,40 @@
 
 <body>
 
-    <!-- ================= HEADER ================= -->
+    <!-- =========================
+         HEADER
+    ========================== -->
 
     <header class="header">
 
         <div class="container header-content">
 
             <div class="logo">
-                <span class="logo-icon" aria-hidden="true">☀</span>
-                <span>Weatherly</span>
+
+                <span
+                    class="logo-icon"
+                    aria-hidden="true"
+                >
+                    ☀
+                </span>
+
+                <span>
+                    Weatherly
+                </span>
+
             </div>
 
             <div class="header-status">
+
                 <span
                     class="status-dot"
                     aria-hidden="true"
                 ></span>
 
-                <span>Live Weather</span>
+                <span>
+                    Live Weather
+                </span>
+
             </div>
 
         </div>
@@ -51,11 +66,16 @@
     </header>
 
 
-    <!-- ================= MAIN ================= -->
+    <!-- =========================
+         MAIN
+    ========================== -->
 
     <main class="container main-content">
 
-        <!-- ================= HERO / SEARCH ================= -->
+
+        <!-- =========================
+             HERO
+        ========================== -->
 
         <section class="hero">
 
@@ -67,18 +87,21 @@
 
                 <h1>
                     Know your weather.
-                    <span>Plan your day.</span>
+                    <span>
+                        Plan your day.
+                    </span>
                 </h1>
 
                 <p class="hero-description">
-                    Get real-time weather information, forecasts,
-                    and atmospheric conditions for any city.
+                    Get real-time weather information,
+                    forecasts, and atmospheric conditions
+                    for any city.
                 </p>
 
             </div>
 
 
-            <!-- Search -->
+            <!-- SEARCH -->
 
             <div class="search-wrapper">
 
@@ -107,6 +130,7 @@
 
                     </div>
 
+
                     <button
                         type="submit"
                         id="search-btn"
@@ -131,7 +155,9 @@
         </section>
 
 
-        <!-- ================= LOADING STATE ================= -->
+        <!-- =========================
+             LOADING
+        ========================== -->
 
         <section
             id="loading-state"
@@ -152,7 +178,9 @@
         </section>
 
 
-        <!-- ================= ERROR STATE ================= -->
+        <!-- =========================
+             ERROR
+        ========================== -->
 
         <section
             id="weather-error"
@@ -173,8 +201,9 @@
             </h3>
 
             <p>
-                We couldn't find weather information for this
-                location. Please check the city name and try again.
+                We couldn't find weather information
+                for this location. Please check the
+                city name and try again.
             </p>
 
             <button
@@ -187,7 +216,9 @@
         </section>
 
 
-        <!-- ================= WEATHER CONTENT ================= -->
+        <!-- =========================
+             WEATHER CONTENT
+        ========================== -->
 
         <section
             id="weather-content"
@@ -195,7 +226,10 @@
             hidden
         >
 
-            <!-- ================= CURRENT WEATHER ================= -->
+
+            <!-- =========================
+                 CURRENT WEATHER
+            ========================== -->
 
             <section class="current-weather card">
 
@@ -217,6 +251,7 @@
 
                     </div>
 
+
                     <div
                         class="weather-icon"
                         id="weather-icon"
@@ -228,7 +263,7 @@
                 </div>
 
 
-                <!-- Main Temperature -->
+                <!-- TEMPERATURE -->
 
                 <div class="temperature-section">
 
@@ -263,9 +298,12 @@
                 </div>
 
 
-                <!-- Weather Stats -->
+                <!-- WEATHER STATS -->
 
                 <div class="weather-stats">
+
+
+                    <!-- HUMIDITY -->
 
                     <div class="weather-stat">
 
@@ -291,6 +329,8 @@
                     </div>
 
 
+                    <!-- WIND -->
+
                     <div class="weather-stat">
 
                         <span
@@ -315,6 +355,8 @@
                     </div>
 
 
+                    <!-- PRESSURE -->
+
                     <div class="weather-stat">
 
                         <span
@@ -338,6 +380,8 @@
 
                     </div>
 
+
+                    <!-- VISIBILITY -->
 
                     <div class="weather-stat">
 
@@ -367,7 +411,9 @@
             </section>
 
 
-            <!-- ================= SUNRISE / SUNSET ================= -->
+            <!-- =========================
+                 SUNRISE / SUNSET
+            ========================== -->
 
             <section class="sun-section">
 
@@ -389,6 +435,9 @@
 
 
                 <div class="sun-grid">
+
+
+                    <!-- SUNRISE -->
 
                     <div class="sun-card card">
 
@@ -413,6 +462,8 @@
 
                     </div>
 
+
+                    <!-- SUNSET -->
 
                     <div class="sun-card card">
 
@@ -442,7 +493,9 @@
             </section>
 
 
-            <!-- ================= HOURLY FORECAST ================= -->
+            <!-- =========================
+                 HOURLY FORECAST
+            ========================== -->
 
             <section
                 id="hourly-section"
@@ -475,7 +528,9 @@
             </section>
 
 
-            <!-- ================= 7-DAY FORECAST ================= -->
+            <!-- =========================
+                 7-DAY FORECAST
+            ========================== -->
 
             <section class="forecast-section">
 
@@ -504,7 +559,9 @@
             </section>
 
 
-            <!-- ================= WEATHER DETAILS ================= -->
+            <!-- =========================
+                 WEATHER DETAILS
+            ========================== -->
 
             <section class="details-section">
 
@@ -528,7 +585,7 @@
                 <div class="details-grid">
 
 
-                    <!-- Humidity -->
+                    <!-- HUMIDITY -->
 
                     <div class="detail-card card">
 
@@ -561,7 +618,7 @@
                     </div>
 
 
-                    <!-- Wind -->
+                    <!-- WIND -->
 
                     <div class="detail-card card">
 
@@ -591,7 +648,7 @@
                     </div>
 
 
-                    <!-- Cloud Cover -->
+                    <!-- CLOUD COVER -->
 
                     <div class="detail-card card">
 
@@ -621,7 +678,7 @@
                     </div>
 
 
-                    <!-- UV Index -->
+                    <!-- UV INDEX -->
 
                     <div class="detail-card card">
 
@@ -659,7 +716,9 @@
     </main>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer class="footer">
 

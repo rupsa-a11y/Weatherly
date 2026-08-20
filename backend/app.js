@@ -1,4 +1,3 @@
-
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -50,6 +49,12 @@ app.get("/api/weather", async (req, res) => {
         const geoResponse = await fetch(geoUrl);
 
         if (!geoResponse.ok) {
+            console.error(
+                "Geocoding service failed:",
+                geoResponse.status,
+                geoResponse.statusText
+            );
+
             return res.status(502).json({
                 error: "Unable to connect to location service",
                 status: geoResponse.status
@@ -63,10 +68,6 @@ app.get("/api/weather", async (req, res) => {
                 error: "City not found"
             });
         }
-
-        // =========================================
-        // FIND BEST LOCATION MATCH
-        // =========================================
 
         const normalizedQuery = city
             .toLowerCase()
@@ -105,7 +106,6 @@ app.get("/api/weather", async (req, res) => {
             latitude: location.latitude,
             longitude: location.longitude,
 
-            // CURRENT WEATHER
             current: [
                 "temperature_2m",
                 "relative_humidity_2m",
@@ -121,7 +121,6 @@ app.get("/api/weather", async (req, res) => {
                 "showers"
             ].join(","),
 
-            // HOURLY WEATHER
             hourly: [
                 "temperature_2m",
                 "apparent_temperature",
@@ -137,7 +136,6 @@ app.get("/api/weather", async (req, res) => {
                 "cloud_cover"
             ].join(","),
 
-            // DAILY WEATHER
             daily: [
                 "weather_code",
                 "temperature_2m_max",
@@ -172,16 +170,10 @@ app.get("/api/weather", async (req, res) => {
                 "Open-Meteo rate limit reached. Retrying after 5 seconds..."
             );
 
-            await new Promise(resolve =>
-                setTimeout(resolve, 5000)
-            );
+            await new Promise(resolve => setTimeout(resolve, 5000));
 
             weatherResponse = await fetch(weatherUrl);
         }
-
-        // =========================================
-        // CHECK WEATHER RESPONSE
-        // =========================================
 
         if (!weatherResponse.ok) {
             console.error(
@@ -218,11 +210,7 @@ app.get("/api/weather", async (req, res) => {
         });
 
     } catch (error) {
-
-        console.error(
-            "Weather API error:",
-            error
-        );
+        console.error("Weather API error:", error);
 
         return res.status(500).json({
             error: "Internal server error"

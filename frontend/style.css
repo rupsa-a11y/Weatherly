@@ -1,10 +1,5 @@
 /* =========================
-   WEATHERLY - WEATHER DASHBOARD
-   UPDATED STYLES
-========================= */
-
-/* =========================
-   GLOBAL RESET
+   WEATHERLY - UPDATED CSS
 ========================= */
 
 * {
@@ -31,14 +26,8 @@
     --success: #31b67a;
     --danger: #e05252;
 
-    --shadow-sm:
-        0 4px 18px rgba(25, 35, 55, 0.045);
-
-    --shadow-md:
-        0 14px 38px rgba(25, 35, 55, 0.075);
-
-    --shadow-lg:
-        0 24px 60px rgba(25, 35, 55, 0.10);
+    --shadow-sm: 0 4px 18px rgba(25, 35, 55, 0.045);
+    --shadow-md: 0 14px 38px rgba(25, 35, 55, 0.075);
 
     --radius-sm: 12px;
     --radius-md: 18px;
@@ -70,7 +59,6 @@ body {
         var(--background);
 
     color: var(--text-primary);
-
     line-height: 1.5;
 
     -webkit-font-smoothing: antialiased;
@@ -126,11 +114,8 @@ button:disabled {
     align-items: center;
     gap: 11px;
 
-    color: var(--text-primary);
-
     font-size: 20px;
     font-weight: 700;
-
     letter-spacing: -0.6px;
 }
 
@@ -149,15 +134,9 @@ button:disabled {
     );
 
     border: 1px solid #dbe3ff;
-
     border-radius: 12px;
 
     color: var(--accent);
-
-    font-size: 19px;
-
-    box-shadow:
-        0 4px 12px rgba(79, 109, 245, 0.08);
 }
 
 .header-status {
@@ -168,7 +147,6 @@ button:disabled {
     color: var(--text-secondary);
 
     font-size: 12px;
-    font-weight: 500;
 }
 
 .status-dot {
@@ -176,28 +154,21 @@ button:disabled {
     height: 7px;
 
     background: var(--success);
-
     border-radius: 50%;
 
     box-shadow:
-        0 0 0 4px rgba(49, 182, 122, 0.10),
-        0 0 10px rgba(49, 182, 122, 0.25);
+        0 0 0 4px rgba(49, 182, 122, 0.10);
 }
 
 
 /* =========================
-   MAIN
+   MAIN / HERO
 ========================= */
 
 .main-content {
     padding-top: 72px;
     padding-bottom: 85px;
 }
-
-
-/* =========================
-   HERO
-========================= */
 
 .hero {
     position: relative;
@@ -229,7 +200,6 @@ button:disabled {
     border-radius: 50%;
 
     pointer-events: none;
-
     z-index: -1;
 }
 
@@ -250,15 +220,11 @@ button:disabled {
     font-size: clamp(42px, 6vw, 68px);
 
     line-height: 1.02;
-
     letter-spacing: -3.5px;
-
-    font-weight: 700;
 }
 
 .hero h1 span {
     display: block;
-
     color: var(--accent);
 }
 
@@ -270,7 +236,6 @@ button:disabled {
     color: var(--text-secondary);
 
     font-size: 15px;
-
     line-height: 1.75;
 }
 
@@ -281,13 +246,11 @@ button:disabled {
 
 .search-wrapper {
     max-width: 680px;
-
     margin: 40px auto 0;
 }
 
 .search-form {
     display: flex;
-
     gap: 8px;
 
     padding: 7px;
@@ -295,16 +258,10 @@ button:disabled {
     background: rgba(255, 255, 255, 0.92);
 
     border: 1px solid rgba(226, 232, 240, 0.95);
-
     border-radius: 17px;
 
     box-shadow:
-        0 18px 45px rgba(25, 35, 55, 0.08),
-        0 3px 10px rgba(25, 35, 55, 0.03);
-
-    transition:
-        border-color var(--transition),
-        box-shadow var(--transition);
+        0 18px 45px rgba(25, 35, 55, 0.08);
 }
 
 .search-form:focus-within {
@@ -317,7 +274,6 @@ button:disabled {
 
 .search-input-wrapper {
     position: relative;
-
     flex: 1;
 
     display: flex;
@@ -326,14 +282,10 @@ button:disabled {
 
 .search-icon {
     position: absolute;
-
     left: 17px;
 
     color: var(--text-light);
-
     font-size: 22px;
-
-    transform: rotate(-20deg);
 
     pointer-events: none;
 }
@@ -350,7 +302,6 @@ button:disabled {
     background: transparent;
 
     color: var(--text-primary);
-
     font-size: 14px;
 }
 
@@ -367,55 +318,28 @@ button:disabled {
     border-radius: 12px;
 
     background: var(--accent);
-
     color: white;
 
     font-size: 13px;
     font-weight: 600;
 
-    box-shadow:
-        0 6px 14px rgba(79, 109, 245, 0.20);
-
-    transition:
-        background var(--transition),
-        transform var(--transition),
-        box-shadow var(--transition);
+    transition: var(--transition);
 }
 
 #search-btn:hover {
     background: var(--accent-dark);
-
     transform: translateY(-1px);
-
-    box-shadow:
-        0 8px 18px rgba(79, 109, 245, 0.25);
-}
-
-#search-btn:active {
-    transform: translateY(0);
-
-    box-shadow:
-        0 4px 10px rgba(79, 109, 245, 0.18);
 }
 
 #search-btn:disabled {
     opacity: 0.7;
-
     transform: none;
-
-    box-shadow: none;
 }
-
-
-/* =========================
-   ERROR MESSAGE
-========================= */
 
 .error-message {
     margin: 9px 5px 0;
 
     color: var(--danger);
-
     font-size: 12px;
 
     text-align: left;
@@ -430,7 +354,6 @@ button:disabled {
     background: var(--surface);
 
     border: 1px solid var(--border);
-
     border-radius: var(--radius-lg);
 
     box-shadow: var(--shadow-sm);
@@ -445,7 +368,6 @@ button:disabled {
     transform: translateY(-3px);
 
     border-color: #d9e0ea;
-
     box-shadow: var(--shadow-md);
 }
 
@@ -474,7 +396,6 @@ button:disabled {
 
 .location-info {
     display: flex;
-
     align-items: flex-start;
     justify-content: space-between;
 }
@@ -492,9 +413,7 @@ button:disabled {
 
 .location-info h2 {
     font-size: 30px;
-
     line-height: 1.15;
-
     letter-spacing: -1px;
 }
 
@@ -502,7 +421,6 @@ button:disabled {
     margin-top: 5px;
 
     color: var(--text-secondary);
-
     font-size: 13px;
 }
 
@@ -522,18 +440,13 @@ button:disabled {
         );
 
     border: 1px solid #e0e6ff;
-
     border-radius: 24px;
 
     font-size: 42px;
-
-    box-shadow:
-        0 10px 25px rgba(79, 109, 245, 0.08);
 }
 
 .temperature-section {
     display: flex;
-
     align-items: center;
 
     gap: 28px;
@@ -543,15 +456,12 @@ button:disabled {
 
 .temperature {
     display: flex;
-
     align-items: flex-start;
 
     font-size: 88px;
-
     font-weight: 700;
 
     letter-spacing: -6px;
-
     line-height: 0.88;
 }
 
@@ -560,7 +470,6 @@ button:disabled {
     margin-left: 5px;
 
     font-size: 27px;
-
     letter-spacing: -1px;
 }
 
@@ -568,13 +477,10 @@ button:disabled {
     margin-bottom: 5px;
 
     font-size: 20px;
-
-    letter-spacing: -0.3px;
 }
 
 .weather-condition p {
     color: var(--text-secondary);
-
     font-size: 13px;
 }
 
@@ -582,14 +488,8 @@ button:disabled {
     color: var(--text-primary);
 }
 
-
-/* =========================
-   WEATHER STATS
-========================= */
-
 .weather-stats {
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
 
     padding-top: 26px;
@@ -599,7 +499,6 @@ button:disabled {
 
 .weather-stat {
     display: flex;
-
     align-items: center;
 
     gap: 12px;
@@ -628,17 +527,13 @@ button:disabled {
     background: var(--surface-soft);
 
     border: 1px solid #edf0f4;
-
     border-radius: 12px;
-
-    font-size: 17px;
 }
 
 .weather-stat p {
     margin-bottom: 2px;
 
     color: var(--text-light);
-
     font-size: 11px;
 }
 
@@ -660,7 +555,6 @@ button:disabled {
 
 .section-heading {
     display: flex;
-
     align-items: flex-end;
     justify-content: space-between;
 
@@ -669,7 +563,6 @@ button:disabled {
 
 .section-heading h2 {
     font-size: 24px;
-
     letter-spacing: -0.8px;
 }
 
@@ -680,7 +573,6 @@ button:disabled {
 
 .sun-grid {
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
 
     gap: 18px;
@@ -688,7 +580,6 @@ button:disabled {
 
 .sun-card {
     display: flex;
-
     align-items: center;
 
     gap: 18px;
@@ -707,7 +598,6 @@ button:disabled {
     background: var(--accent-light);
 
     border: 1px solid #e1e7ff;
-
     border-radius: 17px;
 
     font-size: 28px;
@@ -717,14 +607,11 @@ button:disabled {
     margin-bottom: 3px;
 
     color: var(--text-secondary);
-
     font-size: 12px;
 }
 
 .sun-card h3 {
     font-size: 20px;
-
-    letter-spacing: -0.4px;
 }
 
 
@@ -734,7 +621,6 @@ button:disabled {
 
 .hourly-container {
     display: flex;
-
     gap: 12px;
 
     overflow-x: auto;
@@ -744,21 +630,6 @@ button:disabled {
     scroll-behavior: smooth;
 
     scrollbar-width: thin;
-    scrollbar-color: #cbd5e1 transparent;
-}
-
-.hourly-container::-webkit-scrollbar {
-    height: 7px;
-}
-
-.hourly-container::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.hourly-container::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-
-    border-radius: 20px;
 }
 
 .hourly-card {
@@ -805,13 +676,10 @@ button:disabled {
     margin-bottom: 12px;
 
     font-size: 19px;
-
-    letter-spacing: -0.4px;
 }
 
 .hourly-rain {
     display: flex;
-
     justify-content: center;
     align-items: center;
 
@@ -825,7 +693,7 @@ button:disabled {
 
 
 /* =========================
-   FORECAST
+   7-DAY FORECAST
 ========================= */
 
 .forecast-grid {
@@ -840,7 +708,6 @@ button:disabled {
     padding: 22px 12px;
 
     text-align: center;
-
     overflow: hidden;
 }
 
@@ -857,8 +724,6 @@ button:disabled {
     font-weight: 600;
 
     text-transform: uppercase;
-
-    letter-spacing: 0.4px;
 }
 
 .forecast-icon {
@@ -871,7 +736,6 @@ button:disabled {
 
 .forecast-temperature {
     display: flex;
-
     align-items: baseline;
     justify-content: center;
 
@@ -880,13 +744,10 @@ button:disabled {
 
 .forecast-temperature strong {
     font-size: 19px;
-
-    letter-spacing: -0.4px;
 }
 
 .forecast-temperature span {
     color: var(--text-light);
-
     font-size: 12px;
 }
 
@@ -898,9 +759,7 @@ button:disabled {
     font-size: 10px;
 
     white-space: nowrap;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
 }
 
@@ -932,7 +791,6 @@ button:disabled {
 
 .detail-top {
     display: flex;
-
     align-items: center;
 
     gap: 8px;
@@ -950,7 +808,6 @@ button:disabled {
 
 .detail-card h3 {
     font-size: 27px;
-
     letter-spacing: -1px;
 }
 
@@ -958,14 +815,8 @@ button:disabled {
     margin-top: 5px;
 
     color: var(--text-light);
-
     font-size: 11px;
 }
-
-
-/* =========================
-   PROGRESS BAR
-========================= */
 
 .progress-bar {
     height: 5px;
@@ -991,14 +842,13 @@ button:disabled {
 
 
 /* =========================
-   LOADING STATE
+   LOADING
 ========================= */
 
 .loading-state {
     min-height: 300px;
 
     display: flex;
-
     flex-direction: column;
 
     align-items: center;
@@ -1007,7 +857,6 @@ button:disabled {
     gap: 15px;
 
     color: var(--text-secondary);
-
     font-size: 13px;
 }
 
@@ -1016,7 +865,6 @@ button:disabled {
     height: 38px;
 
     border: 3px solid #e5eaf2;
-
     border-top-color: var(--accent);
 
     border-radius: 50%;
@@ -1025,9 +873,11 @@ button:disabled {
 }
 
 @keyframes spin {
+
     to {
         transform: rotate(360deg);
     }
+
 }
 
 
@@ -1047,7 +897,6 @@ button:disabled {
     background: var(--surface);
 
     border: 1px solid var(--border);
-
     border-radius: var(--radius-lg);
 
     box-shadow: var(--shadow-md);
@@ -1065,13 +914,10 @@ button:disabled {
 
     background: rgba(224, 82, 82, 0.10);
 
-    border: 1px solid rgba(224, 82, 82, 0.10);
-
     color: var(--danger);
 
     border-radius: 50%;
 
-    font-size: 20px;
     font-weight: 700;
 }
 
@@ -1079,8 +925,6 @@ button:disabled {
     margin-bottom: 8px;
 
     font-size: 20px;
-
-    letter-spacing: -0.4px;
 }
 
 .weather-error p {
@@ -1091,7 +935,6 @@ button:disabled {
     color: var(--text-secondary);
 
     font-size: 13px;
-
     line-height: 1.7;
 }
 
@@ -1114,7 +957,6 @@ button:disabled {
 
 .secondary-btn:hover {
     background: #e1e7ff;
-
     transform: translateY(-1px);
 }
 
@@ -1133,7 +975,6 @@ button:disabled {
     min-height: 78px;
 
     display: flex;
-
     align-items: center;
     justify-content: space-between;
 
@@ -1144,7 +985,7 @@ button:disabled {
 
 
 /* =========================
-   TABLET
+   RESPONSIVE
 ========================= */
 
 @media (max-width: 1050px) {
@@ -1152,6 +993,7 @@ button:disabled {
     .forecast-grid {
         grid-template-columns: repeat(4, 1fr);
     }
+
 }
 
 
@@ -1174,17 +1016,17 @@ button:disabled {
     .details-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
-
-/* =========================
-   MOBILE
-========================= */
 
 @media (max-width: 600px) {
 
     .container {
-        width: min(100% - 28px, 1180px);
+        width: min(
+            100% - 28px,
+            1180px
+        );
     }
 
     .header-content {
@@ -1204,23 +1046,15 @@ button:disabled {
         margin-bottom: 48px;
     }
 
-    .hero::before {
-        width: 280px;
-        height: 180px;
-    }
-
     .hero h1 {
-        font-size: clamp(38px, 12vw, 52px);
+        font-size:
+            clamp(
+                38px,
+                12vw,
+                52px
+            );
 
         letter-spacing: -2.2px;
-    }
-
-    .hero-description {
-        max-width: 450px;
-
-        font-size: 14px;
-
-        line-height: 1.7;
     }
 
     .search-wrapper {
@@ -1229,14 +1063,10 @@ button:disabled {
 
     .search-form {
         flex-direction: column;
-
-        gap: 7px;
     }
 
     #search-btn {
         width: 100%;
-
-        height: 50px;
     }
 
     .current-weather {
@@ -1289,11 +1119,8 @@ button:disabled {
     }
 
     .weather-stat:nth-child(odd) {
-        border-right: 1px solid var(--border);
-    }
-
-    .weather-stat:first-child {
-        padding-left: 5px;
+        border-right:
+            1px solid var(--border);
     }
 
     .sun-grid {
@@ -1311,7 +1138,8 @@ button:disabled {
     }
 
     .forecast-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
     .forecast-card:last-child {
@@ -1333,12 +1161,9 @@ button:disabled {
 
         gap: 5px;
     }
+
 }
 
-
-/* =========================
-   SMALL MOBILE
-========================= */
 
 @media (max-width: 380px) {
 
@@ -1358,17 +1183,6 @@ button:disabled {
         font-size: 15px;
     }
 
-    .weather-condition p {
-        font-size: 12px;
-    }
-
-    .stat-icon {
-        width: 36px;
-        height: 36px;
-
-        font-size: 15px;
-    }
-
     .weather-stat {
         gap: 8px;
     }
@@ -1376,6 +1190,7 @@ button:disabled {
     .hourly-card {
         min-width: 88px;
     }
+
 }
 
 
@@ -1385,15 +1200,14 @@ button:disabled {
 
 button:focus-visible,
 input:focus-visible {
-    outline: 3px solid rgba(79, 109, 245, 0.25);
+
+    outline:
+        3px solid
+        rgba(79, 109, 245, 0.25);
 
     outline-offset: 2px;
 }
 
-
-/* =========================
-   REDUCED MOTION
-========================= */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -1404,18 +1218,19 @@ input:focus-visible {
     *,
     *::before,
     *::after {
-        animation-duration: 0.01ms !important;
 
-        animation-iteration-count: 1 !important;
+        animation-duration:
+            0.01ms !important;
 
-        transition-duration: 0.01ms !important;
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
     }
+
 }
 
-
-/* =========================
-   HIDDEN ATTRIBUTE
-========================= */
 
 [hidden] {
     display: none !important;
