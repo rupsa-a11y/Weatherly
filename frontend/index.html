@@ -2,8 +2,13 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <meta
         name="description"
@@ -12,18 +17,35 @@
 
     <title>Weatherly — Weather Dashboard</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Font -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
 
+
 <body>
+
 
     <!-- =========================
          HEADER
@@ -48,22 +70,64 @@
 
             </div>
 
-            <div class="header-status">
 
-                <span
-                    class="status-dot"
-                    aria-hidden="true"
-                ></span>
+            <div class="header-actions">
 
-                <span>
-                    Live Weather
-                </span>
+                <div class="header-status">
+
+                    <span
+                        class="status-dot"
+                        aria-hidden="true"
+                    ></span>
+
+                    <span>
+                        Live Weather
+                    </span>
+
+                </div>
+
+
+                <!-- THEME -->
+
+                <label
+                    class="theme-control"
+                    for="theme-select"
+                >
+
+                    <span
+                        class="theme-control-icon"
+                        aria-hidden="true"
+                    >
+                        ◐
+                    </span>
+
+                    <select
+                        id="theme-select"
+                        aria-label="Choose theme"
+                    >
+
+                        <option value="light">
+                            Light
+                        </option>
+
+                        <option value="system">
+                            System
+                        </option>
+
+                        <option value="dark">
+                            Dark
+                        </option>
+
+                    </select>
+
+                </label>
 
             </div>
 
         </div>
 
     </header>
+
 
 
     <!-- =========================
@@ -85,86 +149,172 @@
                     WEATHER DASHBOARD
                 </p>
 
+
                 <h1>
+
                     Know your weather.
+
                     <span>
                         Plan your day.
                     </span>
+
                 </h1>
 
+
                 <p class="hero-description">
+
                     Get real-time weather information,
                     forecasts, and atmospheric conditions
                     for any city.
+
                 </p>
 
             </div>
 
 
-            <!-- SEARCH -->
-<div class="search-wrapper">
 
-    <form
-        id="weather-form"
-        class="search-form"
-    >
+            <!-- =========================
+                 SEARCH
+            ========================== -->
 
-        <div class="search-input-wrapper">
-
-            <span
-                class="search-icon"
-                aria-hidden="true"
-            >
-                ⌕
-            </span>
-
-            <input
-                type="text"
-                id="city-input"
-                name="city"
-                placeholder="Search for a city..."
-                autocomplete="off"
-                aria-label="City name"
-            >
-
-        </div>
-
-        <button
-            type="submit"
-            id="search-btn"
-        >
-            Search
-        </button>
-
-    </form>
+            <div class="search-wrapper">
 
 
-    <button
-        type="button"
-        id="location-btn"
-        class="location-btn"
-    >
-        📍 Use My Location
-    </button>
+                <form
+                    id="weather-form"
+                    class="search-form"
+                >
+
+                    <div class="search-input-wrapper">
+
+                        <span
+                            class="search-icon"
+                            aria-hidden="true"
+                        >
+                            ⌕
+                        </span>
 
 
-    <p
-        id="search-error"
-        class="error-message"
-        role="alert"
-        hidden
-    >
-        Please enter a valid city name.
-    </p>
+                        <input
+                            type="text"
+                            id="city-input"
+                            name="city"
+                            placeholder="Search for a city..."
+                            autocomplete="off"
+                            aria-label="City name"
+                        >
 
-</div>
-            
+                    </div>
 
-                
 
-             
+                    <button
+                        type="submit"
+                        id="search-btn"
+                    >
+                        Search
+                    </button>
+
+                </form>
+
+
+
+                <!-- CURRENT LOCATION -->
+
+                <button
+                    type="button"
+                    id="location-btn"
+                    class="location-btn"
+                >
+                    📍 Use My Location
+                </button>
+
+
+
+                <!-- SEARCH ERROR -->
+
+                <p
+                    id="search-error"
+                    class="error-message"
+                    role="alert"
+                    hidden
+                >
+                    Please enter a valid city name.
+                </p>
+
+
+
+                <!-- =========================
+                     RECENT SEARCHES
+                ========================== -->
+
+                <div
+                    id="recent-searches"
+                    class="saved-locations"
+                    hidden
+                >
+
+                    <div
+                        class="saved-locations-header"
+                    >
+
+                        <span>
+                            Recent Searches
+                        </span>
+
+
+                        <button
+                            type="button"
+                            id="clear-recent-btn"
+                            class="clear-saved-btn"
+                        >
+                            Clear
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="recent-list"
+                        class="saved-location-list"
+                    ></div>
+
+                </div>
+
+
+
+                <!-- =========================
+                     FAVORITES
+                ========================== -->
+
+                <div
+                    id="favorites-section"
+                    class="saved-locations"
+                    hidden
+                >
+
+                    <div
+                        class="saved-locations-header"
+                    >
+
+                        <span>
+                            Favorites
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="favorites-list"
+                        class="saved-location-list"
+                    ></div>
+
+                </div>
+
+
+            </div>
 
         </section>
+
 
 
         <!-- =========================
@@ -183,11 +333,13 @@
                 aria-hidden="true"
             ></div>
 
+
             <p>
                 Fetching latest weather...
             </p>
 
         </section>
+
 
 
         <!-- =========================
@@ -208,15 +360,18 @@
                 !
             </div>
 
+
             <h3>
                 Unable to fetch weather
             </h3>
+
 
             <p>
                 We couldn't find weather information
                 for this location. Please check the
                 city name and try again.
             </p>
+
 
             <button
                 id="retry-btn"
@@ -226,6 +381,7 @@
             </button>
 
         </section>
+
 
 
         <!-- =========================
@@ -243,9 +399,12 @@
                  CURRENT WEATHER
             ========================== -->
 
-            <section class="current-weather card">
+            <section
+                class="current-weather card"
+            >
 
                 <div class="location-info">
+
 
                     <div>
 
@@ -253,15 +412,33 @@
                             CURRENT LOCATION
                         </p>
 
-                        <h2 id="city-name">
-                            Kolkata
-                        </h2>
+
+                        <div class="city-title-row">
+
+                            <h2 id="city-name">
+                                Kolkata
+                            </h2>
+
+
+                            <button
+                                type="button"
+                                id="favorite-btn"
+                                class="favorite-btn"
+                                aria-label="Add current city to favorites"
+                                hidden
+                            >
+                                ☆
+                            </button>
+
+                        </div>
+
 
                         <p id="date">
                             Thursday, August 20
                         </p>
 
                     </div>
+
 
 
                     <div
@@ -275,9 +452,11 @@
                 </div>
 
 
+
                 <!-- TEMPERATURE -->
 
                 <div class="temperature-section">
+
 
                     <div class="temperature">
 
@@ -292,6 +471,7 @@
                     </div>
 
 
+
                     <div class="weather-condition">
 
                         <h3 id="weather-condition">
@@ -299,10 +479,13 @@
                         </h3>
 
                         <p>
+
                             Feels like
+
                             <strong id="feels-like">
                                 33°C
                             </strong>
+
                         </p>
 
                     </div>
@@ -310,12 +493,11 @@
                 </div>
 
 
+
                 <!-- WEATHER STATS -->
 
                 <div class="weather-stats">
 
-
-                    <!-- HUMIDITY -->
 
                     <div class="weather-stat">
 
@@ -325,6 +507,7 @@
                         >
                             💧
                         </span>
+
 
                         <div>
 
@@ -341,7 +524,6 @@
                     </div>
 
 
-                    <!-- WIND -->
 
                     <div class="weather-stat">
 
@@ -351,6 +533,7 @@
                         >
                             💨
                         </span>
+
 
                         <div>
 
@@ -367,7 +550,6 @@
                     </div>
 
 
-                    <!-- PRESSURE -->
 
                     <div class="weather-stat">
 
@@ -377,6 +559,7 @@
                         >
                             🌡️
                         </span>
+
 
                         <div>
 
@@ -393,7 +576,6 @@
                     </div>
 
 
-                    <!-- VISIBILITY -->
 
                     <div class="weather-stat">
 
@@ -403,6 +585,7 @@
                         >
                             👁️
                         </span>
+
 
                         <div>
 
@@ -423,11 +606,13 @@
             </section>
 
 
+
             <!-- =========================
                  SUNRISE / SUNSET
             ========================== -->
 
             <section class="sun-section">
+
 
                 <div class="section-heading">
 
@@ -446,10 +631,9 @@
                 </div>
 
 
+
                 <div class="sun-grid">
 
-
-                    <!-- SUNRISE -->
 
                     <div class="sun-card card">
 
@@ -459,6 +643,7 @@
                         >
                             🌅
                         </div>
+
 
                         <div>
 
@@ -475,7 +660,6 @@
                     </div>
 
 
-                    <!-- SUNSET -->
 
                     <div class="sun-card card">
 
@@ -485,6 +669,7 @@
                         >
                             🌇
                         </div>
+
 
                         <div>
 
@@ -500,9 +685,11 @@
 
                     </div>
 
+
                 </div>
 
             </section>
+
 
 
             <!-- =========================
@@ -514,7 +701,9 @@
                 class="hourly-section"
             >
 
-                <div class="section-heading">
+                <div
+                    class="section-heading"
+                >
 
                     <div>
 
@@ -540,11 +729,13 @@
             </section>
 
 
+
             <!-- =========================
                  7-DAY FORECAST
             ========================== -->
 
             <section class="forecast-section">
+
 
                 <div class="section-heading">
 
@@ -571,11 +762,13 @@
             </section>
 
 
+
             <!-- =========================
                  WEATHER DETAILS
             ========================== -->
 
             <section class="details-section">
+
 
                 <div class="section-heading">
 
@@ -613,9 +806,11 @@
 
                         </div>
 
+
                         <h3 id="detail-humidity">
                             68%
                         </h3>
+
 
                         <div class="progress-bar">
 
@@ -628,6 +823,7 @@
                         </div>
 
                     </div>
+
 
 
                     <!-- WIND -->
@@ -646,9 +842,11 @@
 
                         </div>
 
+
                         <h3 id="detail-wind">
                             14 km/h
                         </h3>
+
 
                         <p
                             id="wind-description"
@@ -658,6 +856,7 @@
                         </p>
 
                     </div>
+
 
 
                     <!-- CLOUD COVER -->
@@ -676,9 +875,11 @@
 
                         </div>
 
+
                         <h3 id="cloud-cover">
                             18%
                         </h3>
+
 
                         <p
                             id="cloud-description"
@@ -688,6 +889,7 @@
                         </p>
 
                     </div>
+
 
 
                     <!-- UV INDEX -->
@@ -706,9 +908,11 @@
 
                         </div>
 
+
                         <h3 id="uv-index">
                             7
                         </h3>
+
 
                         <p
                             id="uv-description"
@@ -719,6 +923,7 @@
 
                     </div>
 
+
                 </div>
 
             </section>
@@ -726,6 +931,7 @@
         </section>
 
     </main>
+
 
 
     <!-- =========================
